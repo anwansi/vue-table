@@ -3,7 +3,8 @@
     <body-cell v-for="colDef in columns"
                :key="colDef.id"
                :column="colDef"
-               :cellData="cellData(colDef)"></body-cell>
+               :cellData="cellData(colDef)"
+               @select="handleCellSelect(colDef, $event)"></body-cell>
   </tr>
 </template>
 
@@ -39,6 +40,11 @@ export default {
     methods : {
         cellData(colDef) {
             return (this.rowData || {})[colDef.id];
+        },
+        handleCellSelect(colDef, selected) {
+            if (colDef.system && colDef.id === '_select') {
+                this.$emit('select-row', selected);
+            }
         }
     }
 };

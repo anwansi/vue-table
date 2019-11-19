@@ -7,7 +7,8 @@
       <body-row v-for="(rowData, i) in sortedRowData"
                 :key="i"
                 :columns="columnState"
-                :rowData="rowData" />
+                :rowData="rowData"
+                @select-row="handleSelectRow(rowData, $event)"/>
     </tbody>
   </table>
 </template>
@@ -26,6 +27,10 @@ export default {
         };
     },
     props : {
+        canSelect : {
+            type    : Boolean,
+            default : true
+        },
         columns : {
             type    : Array,
             default : () => [],
@@ -47,7 +52,7 @@ export default {
     },
     computed : {
         columnState() {
-            return this.columns.map(column => {
+            const cols = this.columns.map(column => {
                 let hidden = false;
                 if (column.hidden || this.hiddenColumns[column.id]) {
                     hidden = true;
@@ -55,10 +60,24 @@ export default {
 
                 return Object.assign({ hidden }, column);
             });
+
+            if (this.canSelect) {
+                cols.unshift({
+                    id     : "_select",
+                    name   : "",
+                    system : true
+                });
+            }
+
+            return cols;
         },
         sortedRowData() {
             const rowData = this.rows.slice();
             return rowData;
+        }
+    },
+    methods : {
+        handleSelectRow(rowData, selected) {
         }
     }
 };

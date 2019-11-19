@@ -1,5 +1,11 @@
 <template>
-  <td :style="cellStyle">{{ rowDisplay }}</td>
+  <td :style="cellStyle">
+    <input v-if="generateSelect"
+           ref="select"
+           type="checkbox"
+           @change="handleChangeCheckbox"/>
+    <template v-else>{{ display }}</template>
+  </td>
 </template>
 
 <script>
@@ -22,12 +28,16 @@ export default {
         }
     },
     computed : {
+        generateSelect() {
+            const col = this.column;
+            return (col.system && col.id === '_select');
+        },
         cellStyle() {
             return {
                 display : this.column.hidden ? 'none' : ''
             };
         },
-        rowDisplay() {
+        display() {
             if ('displayValue' in this.cellData) {
                 return this.cellData.displayValue;
             }
@@ -36,6 +46,12 @@ export default {
         }
     },
     methods : {
+        isSelected() {
+            return this.$refs.select.checked;
+        },
+        handleChangeCheckbox(event, foo) {
+            this.$emit('select', this.isSelected());
+        }
     }
 };
 
