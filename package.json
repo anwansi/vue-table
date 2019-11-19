@@ -4,19 +4,23 @@
     "private": true,
     "scripts": {
         "serve": "npm prune; npm i; vue-cli-service serve",
-        "build": "vue-cli-service build",
+        "build": "npm ci; vue-cli-service build",
+        "test:unit": "vue-cli-service test:unit tests/unit/*.js",
         "lint": "vue-cli-service lint"
     },
     "dependencies": {
-        "core-js": "^3.3.2",
+        "core-js": "^2.6.5",
         "vue": "^2.6.10"
     },
     "devDependencies": {
-        "@vue/cli-plugin-babel": "^4.0.0",
-        "@vue/cli-plugin-eslint": "^4.0.0",
-        "@vue/cli-service": "^4.0.0",
+        "@vue/cli-plugin-babel": "^3.11.0",
+        "@vue/cli-plugin-eslint": "^3.11.0",
+        "@vue/cli-plugin-unit-mocha": "^4.0.5",
+        "@vue/cli-service": "^3.11.0",
         "@vue/eslint-config-standard": "^4.0.0",
-        "babel-eslint": "^10.0.3",
+        "@vue/test-utils": "1.0.0-beta.29",
+        "babel-eslint": "^10.0.1",
+        "chai": "^4.1.2",
         "eslint": "^5.16.0",
         "eslint-plugin-vue": "^5.0.0",
         "vue-template-compiler": "^2.6.10"
