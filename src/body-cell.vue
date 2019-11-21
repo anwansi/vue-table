@@ -38,8 +38,8 @@ export default {
     },
     computed : {
         generateSelect() {
-            const col = this.column;
-            return (col.system && col.id === '_select');
+            const column = this.column;
+            return (column.system && column.id === '_select');
         },
         cellStyle() {
             const column = this.column;
