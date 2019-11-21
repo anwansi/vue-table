@@ -122,6 +122,8 @@ export default {
                     const num = parseInt(value);
                     if (isNaN(num)) {
                         result = '';
+                    } else if (format.numberFormat) {
+                        result = formatter.formatInteger(Math.round(num));
                     } else {
                         result = `${Math.round(num)}`;
                     }

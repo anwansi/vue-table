@@ -1,4 +1,24 @@
 export default {
+    formatInteger(integer) {
+        let value = `${integer}`;
+
+        if (value.length < 4) {
+            return value;
+        }
+
+        const parts = [];
+
+        while (/(\d{3})$/.test(value)) {
+            parts.unshift(RegExp.$1);
+            value = value.slice(0, value.length - 3);
+        }
+
+        if (value.length) {
+            parts.unshift(value);
+        }
+
+        return parts.join(',');
+    },
     capitalize(text) {
         // To be applied to a single word
         return text.charAt(0).toUpperCase() + text.substr(1);
