@@ -8,6 +8,7 @@
       <template v-else-if="booleanDisplay">
         <boolean-display :value="booleanDisplay.value" :text="booleanDisplay.text" />
       </template>
+      <template v-else-if="emptyDisplay">&mdash;</template>
       <template v-else>{{ display }}</template>
     </div>
   </td>
@@ -86,6 +87,16 @@ export default {
             }
 
             return result;
+        },
+        emptyDisplay() {
+            if ('displayValue' in this.cellData) {
+                const dispVal = this.cellData.displayValue;
+                if (dispVal === null || dispVal === undefined || dispVal === '') {
+                    return true;
+                }
+            }
+
+            return false;
         },
         display() {
             if ('displayValue' in this.cellData) {
