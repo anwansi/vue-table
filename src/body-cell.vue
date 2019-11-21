@@ -41,8 +41,32 @@ export default {
             return (col.system && col.id === '_select');
         },
         cellStyle() {
+            const column = this.column;
+
+            let align = '';
+
+            if ('align' in column) {
+                switch (column.align) {
+                    case 'right':
+                    case 'center':
+                    case 'left':
+                        align = column.align;
+                        break;
+                }
+            } else {
+                switch (column.type) {
+                    case 'number':
+                        align = 'right';
+                        break;
+                    default:
+                        align = 'left';
+                        break;
+                }
+            }
+
             return {
-                display : this.column.hidden ? 'none' : ''
+                display   : this.column.hidden ? 'none' : '',
+                textAlign : align
             };
         },
         booleanDisplay() {
