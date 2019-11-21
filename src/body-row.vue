@@ -39,7 +39,7 @@ export default {
     },
     methods : {
         cellData(colDef) {
-            return (this.rowData || {})[colDef.id];
+            return (this.rowData || {}).data[colDef.id];
         },
         handleCellSelect(colDef, selected) {
             if (colDef.system && colDef.id === '_select') {
