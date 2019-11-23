@@ -1,5 +1,6 @@
 <template>
-  <th :style="cellStyle">{{ column.name }}</th>
+  <th :style="cellStyle"
+      @click="handleClick">{{ column.name }}</th>
 </template>
 
 <script>
@@ -18,13 +19,28 @@ export default {
         }
     },
     computed : {
+        systemColumn() {
+            return (this.column && this.column.system);
+        },
         cellStyle() {
-            return {
+            const result = {
                 display : this.column.hidden ? 'none' : ''
             };
+
+            if (! this.systemColumn) {
+                result.cursor = 'pointer';
+            }
+
+            return result;
         }
     },
     methods : {
+        handleClick(event) {
+            if (this.systemColumn) {
+                return;
+            }
+            this.$emit('click');
+        }
     }
 };
 

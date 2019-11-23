@@ -1,6 +1,9 @@
 <template>
   <tr>
-    <head-cell v-for="colDef in columns" :key="colDef.id" :column="colDef"></head-cell>
+    <head-cell v-for="colDef in columns"
+               :key="colDef.id"
+               :column="colDef"
+               @click="handleClickCell(colDef.id)"></head-cell>
   </tr>
 </template>
 
@@ -30,6 +33,9 @@ export default {
     computed : {
     },
     methods : {
+        handleClickCell(columnId) {
+            this.$emit('click-column', columnId);
+        }
     }
 };
 
