@@ -5,11 +5,13 @@
                 @click-column="handleClickColumn" />
     </thead>
     <tbody>
-      <body-row v-for="(rowData, i) in sortedRowData"
-                :key="i"
-                :columns="columnState"
-                :rowData="rowData"
-                @select-row="handleSelectRow(rowData, $event)"/>
+      <tr v-for="(rowData, i) in sortedRowData" :key="i">
+        <body-cell v-for="colDef in columnState"
+                   :key="colDef.id"
+                   :column="colDef"
+                   :cellData="rowData.data[colDef.id]"
+                   @select="handleCellSelect(colDef, rowData.id, $event)"></body-cell>
+      </tr>
     </tbody>
   </table>
 </template>
@@ -18,10 +20,10 @@
 
 import validation from './validation';
 import HeadRow from './head-row';
-import BodyRow from './body-row';
+import BodyCell from './body-cell';
 
 export default {
-    components : { BodyRow, HeadRow },
+    components : { BodyCell, HeadRow },
     data() {
         return {
             hiddenColumns : {},
@@ -109,7 +111,10 @@ export default {
         columnById(id) {
             return this.columns.find(item => item.id === id);
         },
-        handleSelectRow(rowData, selected) {
+        handleCellSelect(colDef, rowId, selected) {
+            if (colDef.system && colDef.id === '_select') {
+                this.$emit('select-row', colDef.id, rowId, selected);
+            }
         },
         handleClickColumn(columnId) {
             if (this.sortColumnId === columnId) {
