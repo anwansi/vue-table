@@ -265,12 +265,19 @@ table.anwansi_table {
 
 table.anwansi_table th {
     font-size:14px;
-    padding:0px 15px;
+    font-weight:normal;
+    padding:5px 15px;
+    background-color:#E5E5E5;
+    border-bottom:1px solid #E5E5E5;
+    border-left:1px solid #FFFFFF;
+    border-right:1px solid #FFFFFF;
+    vertical-align:bottom;
 }
 
 table.anwansi_table td {
     padding:0px;
     transition:background-color 250ms;
+    vertical-align:top;
 }
 
 table.anwansi_table td > div.cell_content {
