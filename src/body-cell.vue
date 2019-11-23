@@ -72,22 +72,31 @@ export default {
             };
         },
         booleanDisplay() {
-            let result = null;
+            if ('displayValue' in this.cellData) {
+                return null;
+            }
 
-            if (this.column.type === 'boolean') {
-                const format = this.column.format || {};
-                const value  = !! this.cellData.value;
+            if (this.column.type !== 'boolean') {
+                return null;
+            }
 
+            const format = this.column.format || {};
+            if (! format.booleanIcon) {
+                return false;
+            }
+
+            const value = this.cellData.value;
+            if (value === true || value === false) {
                 let text = value ? 'True' : 'False';
 
                 if (format.booleanTextMap) {
                     text = format.booleanTextMap[value ? 'true' : 'false'];
                 }
 
-                result = { value, text };
+                return { value, text };
             }
 
-            return result;
+            return null;
         },
         displayDash() {
             const display = this.display;

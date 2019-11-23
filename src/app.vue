@@ -54,6 +54,7 @@ export default {
                     name   : 'Domestic',
                     type   : 'boolean',
                     format : {
+                        booleanIcon    : true,
                         booleanTextMap : { 'true' : 'Yes', 'false' : 'No' }
                     },
                     emptyNa : true
