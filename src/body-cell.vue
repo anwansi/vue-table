@@ -8,7 +8,8 @@
       <template v-else-if="booleanDisplay">
         <boolean-display :value="booleanDisplay.value" :text="booleanDisplay.text" />
       </template>
-      <template v-else-if="emptyDisplay">&mdash;</template>
+      <template v-else-if="displayDash">&mdash;</template>
+      <template v-else-if="displayNa"><span class="na">na</span></template>
       <template v-else>{{ display }}</template>
     </div>
   </td>
@@ -88,14 +89,22 @@ export default {
 
             return result;
         },
-        emptyDisplay() {
-            if ('displayValue' in this.cellData) {
-                const dispVal = this.cellData.displayValue;
-                if (dispVal === null || dispVal === undefined || dispVal === '') {
+        displayDash() {
+            const display = this.display;
+            if (display === null || display === undefined || display === '') {
+                if (this.column.emptyDash) {
                     return true;
                 }
             }
-
+            return false;
+        },
+        displayNa() {
+            const display = this.display;
+            if (display === null || display === undefined || display === '') {
+                if (this.column.emptyNa) {
+                    return true;
+                }
+            }
             return false;
         },
         display() {
@@ -161,4 +170,10 @@ export default {
 </script>
 
 <style scoped>
+
+.na {
+    font-variant:small-caps;
+    color:#808080;
+}
+
 </style>

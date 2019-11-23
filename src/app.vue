@@ -16,10 +16,11 @@ export default {
         return {
             columns : [
                 {
-                    id     : 'year',
-                    name   : 'Year',
-                    type   : 'number',
-                    format : { numberInteger : true }
+                    id      : 'year',
+                    name    : 'Year',
+                    type    : 'number',
+                    format  : { numberInteger : true },
+                    emptyNa : true
                 },
                 {
                     id     : 'make',
@@ -28,22 +29,25 @@ export default {
                     format : { stringTitle : true }
                 },
                 {
-                    id     : 'model',
-                    name   : 'Model',
-                    type   : 'string',
-                    format : { stringTitle : true }
+                    id      : 'model',
+                    name    : 'Model',
+                    type    : 'string',
+                    format  : { stringTitle : true },
+                    emptyNa : true
                 },
                 {
-                    id     : 'trim',
-                    name   : 'Trim',
-                    type   : 'string',
-                    format : { stringUpper : true }
+                    id      : 'trim',
+                    name    : 'Trim',
+                    type    : 'string',
+                    format  : { stringUpper : true },
+                    emptyNa : true
                 },
                 {
-                    id     : 'mileage',
-                    name   : 'Mileage',
-                    type   : 'number',
-                    format : { numberInteger : true, numberFormat : true }
+                    id        : 'mileage',
+                    name      : 'Mileage',
+                    type      : 'number',
+                    format    : { numberInteger : true, numberFormat : true },
+                    emptyDash : true
                 },
                 {
                     id     : 'domestic',
@@ -51,7 +55,8 @@ export default {
                     type   : 'boolean',
                     format : {
                         booleanTextMap : { 'true' : 'Yes', 'false' : 'No' }
-                    }
+                    },
+                    emptyNa : true
                 }
             ],
             rows : [
@@ -61,7 +66,7 @@ export default {
                         year     : { value : 1986 },
                         make     : { value : 'chevrolet' },
                         model    : { value : 'caprice classic' },
-                        trim     : { value : '', displayValue : '' },
+                        trim     : { value : '' },
                         mileage  : { value : 172191 },
                         domestic : { value : true }
                     }
@@ -105,7 +110,7 @@ export default {
                         year     : { value : 1983 },
                         make     : { value : 'volkswagen' },
                         model    : { value : 'rabbit' },
-                        trim     : { value : '', displayValue : '' },
+                        trim     : { value : '' },
                         mileage  : { value : 198987 },
                         domestic : { value : false }
                     }
@@ -160,7 +165,7 @@ export default {
                         year     : { value : 1991 },
                         make     : { value : 'buick' },
                         model    : { value : 'century' },
-                        trim     : { value : '', displayValue : '' },
+                        trim     : { value : '' },
                         mileage  : { value : 124991 },
                         domestic : { value : true }
                     }
@@ -171,7 +176,7 @@ export default {
                         year     : { value : 1993 },
                         make     : { value : 'cadillac' },
                         model    : { value : 'fleetwood' },
-                        trim     : { value : '', displayValue : '' },
+                        trim     : { value : '' },
                         mileage  : { value : 97772 },
                         domestic : { value : true }
                     }
@@ -215,7 +220,7 @@ export default {
                         year     : { value : 1987 },
                         make     : { value : 'mercedes' },
                         model    : { value : '500sel', displayValue : '500SEL' },
-                        trim     : { value : '', displayValue : '' },
+                        trim     : { value : '' },
                         mileage  : { value : 16299 },
                         domestic : { value : false }
                     }
@@ -226,9 +231,20 @@ export default {
                         year     : { value : 2000 },
                         make     : { value : 'audi' },
                         model    : { value : 'tt', displayValue : 'TT' },
-                        trim     : { value : '', displayValue : '' },
+                        trim     : { value : '' },
                         mileage  : { value : 89092 },
                         domestic : { value : false }
+                    }
+                },
+                {
+                    id   : 'auto017',
+                    data : {
+                        year     : { value : null },
+                        make     : { value : 'yugo' },
+                        model    : { value : null },
+                        trim     : { value : null },
+                        mileage  : { value : null },
+                        domestic : { value : null }
                     }
                 }
             ]
