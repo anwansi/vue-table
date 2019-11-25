@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{ dark }">
     <h1>Table Demo</h1>
-    <vue-table :columns="columns" :rows="rows" />
+    <vue-table :dark="dark" :columns="columns" :rows="rows" />
   </div>
 </template>
 
@@ -14,6 +14,7 @@ export default {
     components  : { VueTable },
     data() {
         return {
+            dark    : true,
             columns : [
                 {
                     id      : 'year',
@@ -257,10 +258,24 @@ export default {
 
 <style>
 
+#app {
+    background-color:#FFFFFF;
+    padding:10px 20px;
+}
+
+#app.dark {
+    background-color:#000000;
+}
+
+#app.dark h1 {
+    color:#FFFFFF;
+}
+
 table.anwansi_table {
     border-collapse:collapse;
     font-family:avenir, "helvetica neue", helvetica, arial, sans-serif;
     font-size:0px;
+    color:#333333;
 }
 
 table.anwansi_table th {
@@ -295,6 +310,17 @@ table.anwansi_table td.configured > div.cell_content {
 
 table.anwansi_table tr:hover td {
     background-color:rgba(51, 102, 255, 0.1);
+}
+
+table.anwansi_table.dark {
+    color:#E5E5E5;
+}
+
+table.anwansi_table.dark th {
+    background-color:#333333;
+    border-bottom-color:#333333;
+    border-left-color:#000000;
+    border-right-color:#000000;
 }
 
 </style>

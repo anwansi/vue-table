@@ -1,5 +1,5 @@
 <template>
-  <table class="anwansi_table">
+  <table :class="['anwansi_table', { dark }]">
     <thead>
       <head-row :columns="columnState"
                 @click-column="handleClickColumn" />
@@ -32,6 +32,10 @@ export default {
         };
     },
     props : {
+        dark : {
+            type    : Boolean,
+            default : false
+        },
         canSelect : {
             type    : Boolean,
             default : true
