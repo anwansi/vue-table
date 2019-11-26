@@ -1,5 +1,13 @@
 <template>
   <div id="app" :class="{ dark }">
+    <div id="options">
+      <label>
+        <input ref="darkInput"
+               type="checkbox"
+               @change="handleChangeDark" />
+        Dark
+      </label>
+    </div>
     <h1>Table Demo</h1>
     <vue-table :dark="dark" :columns="columns" :rows="rows" />
   </div>
@@ -14,7 +22,7 @@ export default {
     components  : { VueTable },
     data() {
         return {
-            dark    : true,
+            dark    : false,
             columns : [
                 {
                     id      : 'year',
@@ -251,6 +259,19 @@ export default {
                 }
             ]
         };
+    },
+    watch : {
+        dark : {
+            immediate : true,
+            handler(newValue) {
+                document.body.classList.toggle('dark', newValue);
+            }
+        }
+    },
+    methods : {
+        handleChangeDark(event) {
+            this.dark = this.$refs.darkInput.checked;
+        }
     }
 };
 
@@ -258,17 +279,22 @@ export default {
 
 <style>
 
-#app {
+body {
     background-color:#FFFFFF;
-    padding:10px 20px;
+    color:#333333;
+    font-family:avenir, "helvetica neue", helvetica, arial, sans-serif;
 }
 
-#app.dark {
+body.dark {
     background-color:#000000;
+    color:#FFFFFF;
 }
 
-#app.dark h1 {
-    color:#FFFFFF;
+#options {
+}
+
+#app {
+    padding:10px 20px;
 }
 
 table.anwansi_table {
