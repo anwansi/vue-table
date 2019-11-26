@@ -1,8 +1,12 @@
 <template>
   <table :class="['anwansi_table', { dark }]">
     <thead>
-      <head-row :columns="columnState"
-                @click-column="handleClickColumn" />
+      <tr>
+        <head-cell v-for="column in columnState"
+                   :key="column.id"
+                   :column="column"
+                   @click="handleClickColumn(column.id)"></head-cell>
+      </tr>
     </thead>
     <tbody>
       <tr v-for="(rowData, i) in sortedRowData" :key="i">
@@ -19,11 +23,11 @@
 <script>
 
 import validation from './validation';
-import HeadRow from './head-row';
+import HeadCell from './head-cell';
 import BodyCell from './body-cell';
 
 export default {
-    components : { BodyCell, HeadRow },
+    components : { BodyCell, HeadCell },
     data() {
         return {
             hiddenColumns : {},
