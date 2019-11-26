@@ -326,16 +326,20 @@ table.anwansi_table td > div.cell_content {
     padding:3px 0px;
 }
 
-table.anwansi_table td.system.select > div.cell_content {
-    padding:3px 3px;
-}
-
 table.anwansi_table td.configured > div.cell_content {
     padding:3px 10px;
 }
 
 table.anwansi_table tr:hover td {
     background-color:rgba(51, 102, 255, 0.1);
+}
+
+table.anwansi_table th.system.select {
+    padding:5px;
+}
+
+table.anwansi_table td.system.select > div.cell_content {
+    padding:3px 3px;
 }
 
 table.anwansi_table.dark {

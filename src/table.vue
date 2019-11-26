@@ -66,19 +66,28 @@ export default {
     computed : {
         columnState() {
             const cols = this.columns.map(column => {
-                let hidden = false;
+                let hidden  = false;
+                let sortDir = '';
                 if (column.hidden || this.hiddenColumns[column.id]) {
                     hidden = true;
                 }
 
-                return Object.assign({ hidden }, column);
+                if (column.id === this.sortColumnId) {
+                    sortDir = this.sortAscending ? 'asc' : 'desc';
+                }
+
+                return Object.assign({
+                    hidden,
+                    sortDirection : sortDir
+                }, column);
             });
 
             if (this.canSelect) {
                 cols.unshift({
                     id     : "_select",
                     name   : "",
-                    system : true
+                    system : true,
+                    align  : 'center'
                 });
             }
 
