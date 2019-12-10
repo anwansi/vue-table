@@ -108,6 +108,23 @@ export default {
                     return (typeof item === 'object');
                 });
             }
+        },
+        defaultSort : {
+            type : Array
+        }
+    },
+    mounted() {
+        const defSort = this.defaultSort || [];
+
+        if (defSort && defSort.length) {
+            const colId = defSort[0] || '';
+            const valid = this.columns.some(colDef => (colDef.id === colId));
+
+            if (valid) {
+                this.sortColumnId  = colId;
+                this.sortAscending = (defSort.length >= 2) ? !! defSort[1]
+                                                           : true;
+            }
         }
     },
     computed : {

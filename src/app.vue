@@ -9,7 +9,10 @@
       </label>
     </div>
     <h1>Table Demo</h1>
-    <vue-table :dark="dark" :columns="columns" :rows="rows" />
+    <vue-table :dark="dark"
+               :columns="columns"
+               :rows="rows"
+               :defaultSort="defaultSort" />
   </div>
 </template>
 
@@ -22,8 +25,9 @@ export default {
     components  : { VueTable },
     data() {
         return {
-            dark    : false,
-            columns : [
+            dark        : false,
+            defaultSort : ['year', false],
+            columns     : [
                 {
                     id      : 'year',
                     name    : 'Year',
