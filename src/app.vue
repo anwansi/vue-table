@@ -297,56 +297,63 @@ body.dark {
     padding:10px 20px;
 }
 
-table.anwansi_table {
+div.anwansi_table > table {
     border-collapse:collapse;
     font-family:avenir, "helvetica neue", helvetica, arial, sans-serif;
     font-size:0px;
     color:#333333;
 }
 
-table.anwansi_table th {
+div.anwansi_table > table th {
     font-size:14px;
     font-weight:normal;
     padding:5px 15px;
     background-color:#E5E5E5;
-    border-bottom:1px solid #E5E5E5;
-    border-left:1px solid #FFFFFF;
-    border-right:1px solid #FFFFFF;
+    border:1px solid #CCCCCC;
     vertical-align:bottom;
 }
 
-table.anwansi_table td {
+div.anwansi_table > table td {
     padding:0px;
     transition:background-color 250ms;
     vertical-align:top;
+    border-bottom:1px solid #E5E5E5;
 }
 
-table.anwansi_table td > div.cell_content {
+div.anwansi_table > table td:first-child {
+    border-left:1px solid #E5E5E5;
+}
+
+div.anwansi_table > table td:last-child {
+    border-right:1px solid #E5E5E5;
+}
+
+div.anwansi_table > table td > div.cell_content {
     font-size:14px;
     padding:3px 0px;
 }
 
-table.anwansi_table td.configured > div.cell_content {
+div.anwansi_table > table td.configured > div.cell_content {
     padding:3px 10px;
 }
 
-table.anwansi_table tr:hover td {
+div.anwansi_table > table tr:hover td {
     background-color:rgba(51, 102, 255, 0.1);
 }
 
-table.anwansi_table th.system.select {
+div.anwansi_table > table th.system.select {
     padding:5px;
 }
 
-table.anwansi_table td.system.select > div.cell_content {
+div.anwansi_table > table td.system.select > div.cell_content {
     padding:3px 3px;
 }
 
-table.anwansi_table.dark {
+div.anwansi_table.dark > table {
     color:#E5E5E5;
 }
 
-table.anwansi_table.dark th {
+div.anwansi_table.dark > table th {
     background-color:#333333;
     border-bottom-color:#333333;
     border-left-color:#000000;
