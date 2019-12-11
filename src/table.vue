@@ -92,7 +92,7 @@ export default {
             type    : Boolean,
             default : false
         },
-        canSelect : {
+        enableSelect : {
             type    : Boolean,
             default : true
         },
@@ -187,7 +187,7 @@ export default {
                 }, column);
             });
 
-            if (this.canSelect) {
+            if (this.enableSelect) {
                 cols.unshift({
                     id     : "_select",
                     name   : "",
