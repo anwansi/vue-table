@@ -83,7 +83,7 @@ export default {
             sortColumnId     : '',
             sortAscending    : true,
             currentPage      : 1,
-            pageSize         : 5,
+            pageSize         : 10,
             pageLinkSpan     : 2
         };
     },
@@ -98,7 +98,7 @@ export default {
         },
         pageSizes : {
             type    : Array,
-            default : () => [5, 25, 200]
+            default : () => [10, 50, 200]
         },
         allowAllPages : {
             type    : Boolean,
