@@ -12,7 +12,14 @@
     <vue-table :dark="dark"
                :columns="columns"
                :rows="rows"
-               :defaultSort="defaultSort" />
+               :defaultSort="defaultSort"
+               :showRefresh="showRefresh"
+               :showAdd="showAdd"
+               :enableRefresh="enableRefresh"
+               :enableAdd="enableAdd"
+               :refreshing="tableRefreshing"
+               @add="handleTableAdd"
+               @refresh="handleTableRefresh" />
   </div>
 </template>
 
@@ -25,9 +32,14 @@ export default {
     components  : { VueTable },
     data() {
         return {
-            dark        : false,
-            defaultSort : ['year', false],
-            columns     : [
+            dark            : false,
+            defaultSort     : ['year', false],
+            tableRefreshing : false,
+            showAdd         : true,
+            showRefresh     : true,
+            enableAdd       : true,
+            enableRefresh   : true,
+            columns         : [
                 {
                     id      : 'year',
                     name    : 'Year',
@@ -275,6 +287,34 @@ export default {
     methods : {
         handleChangeDark(event) {
             this.dark = this.$refs.darkInput.checked;
+        },
+        handleTableAdd() {
+            const auto = this.rows.find(item => (item.id === 'auto999'));
+            if (auto) {
+                return;
+            }
+
+            this.tableRefreshing = true;
+
+            setTimeout(() => {
+                this.rows.push({
+                    id   : 'auto999',
+                    data : {
+                        year     : { value : 2019 },
+                        make     : { value : 'audi' },
+                        model    : { value : 's5' },
+                        trim     : { value : 'prestige', displayValue : 'Prestige' },
+                        mileage  : { value : 18000 },
+                        domestic : { value : false }
+                    }
+                });
+                this.enableAdd = false;
+                this.tableRefreshing = false;
+            }, 2000);
+        },
+        handleTableRefresh() {
+            this.tableRefreshing = true;
+            setTimeout(() => { this.tableRefreshing = false; }, 2000);
         }
     }
 };

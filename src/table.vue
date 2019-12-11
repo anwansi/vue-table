@@ -1,7 +1,17 @@
 <template>
-  <div :class="['anwansi_table', { dark }]">
+  <div :class="['anwansi_table', { dark, refreshing }]">
     <div class="utils upper">
       <div class="utils upper_left">
+        <button class="refresh"
+                v-if="showRefresh"
+                :title="refreshLabel"
+                :disabled="isRefreshDisabled"
+                @click="$emit('refresh')"></button>
+        <button class="add"
+                v-if="showAdd"
+                :title="addLabel"
+                :disabled="isAddDisabled"
+                @click="$emit('add')"></button>
       </div>
       <div class="utils upper_right">
         <div class="pagination">
@@ -114,6 +124,34 @@ export default {
         },
         defaultSort : {
             type : Array
+        },
+        showRefresh : {
+            type    : Boolean,
+            default : false
+        },
+        showAdd : {
+            type    : Boolean,
+            default : false
+        },
+        enableRefresh : {
+            type    : Boolean,
+            default : true
+        },
+        enableAdd : {
+            type    : Boolean,
+            default : true
+        },
+        addLabel : {
+            type    : String,
+            default : "Add"
+        },
+        refreshLabel : {
+            type    : String,
+            default : "Refresh"
+        },
+        refreshing : {
+            type    : Boolean,
+            default : false
         }
     },
     mounted() {
@@ -206,6 +244,12 @@ export default {
             const end   = start + size;
 
             return data.slice(start, end);
+        },
+        isRefreshDisabled() {
+            return this.refreshing || ! this.enableRefresh;
+        },
+        isAddDisabled() {
+            return this.refreshing || ! this.enableAdd;
         }
     },
     methods : {
@@ -337,11 +381,11 @@ div.anwansi_table.dark {
 }
 
 .utils.lower {
-    align-items:flex-end;
+    align-items:flex-start;
 }
 
 .utils.upper {
-    align-items:flex-start;
+    align-items:flex-end;
 }
 
 .utils.lower > *,
@@ -360,6 +404,69 @@ div.anwansi_table.dark {
 
 .utils.upper_left, .utils.lower_left {
     justify-content:flex-start;
+}
+
+div.anwansi_table button {
+    width:18px;
+    height:18px;
+    margin:0px 0px 5px 10px;
+    padding:0px;
+    background-repeat:no-repeat;
+    background-size:contain;
+    background-position:center;
+    background-color:transparent;
+    border:0px;
+    cursor:pointer;
+    position:relative;
+    top:0px;
+    transition:top 250ms, opacity 500ms;
+}
+
+div.anwansi_table button:first-child {
+    margin-left:0px;
+}
+
+div.anwansi_table button:active {
+    top:1px;
+}
+
+div.anwansi_table button.add {
+    background-image:url('./assets/plus-black.png');
+}
+
+div.anwansi_table button.refresh {
+    background-image:url('./assets/refresh-black.png');
+}
+
+div.anwansi_table.dark button.add {
+    background-image:url('./assets/plus-white.png');
+}
+
+div.anwansi_table.dark button.refresh {
+    background-image:url('./assets/refresh-white.png');
+}
+
+div.anwansi_table.refreshing button,
+div.anwansi_table button:disabled {
+    opacity:0.35;
+}
+
+div.anwansi_table.refreshing button {
+    transform-origin:50% 50%;
+}
+
+div.anwansi_table.refreshing button.refresh {
+    animation-name:vt-button-rotate;
+    animation-iteration-count:infinite;
+    animation-timing-function:linear;
+    animation-duration:1000ms;
+    animation-fill-mode:forwards;
+}
+
+@keyframes vt-button-rotate {
+    0% { transform:rotate(360deg) }
+    50% { transform:rotate(180deg) }
+    100% { transform:rotate(0deg) }
 }
 
 </style>
