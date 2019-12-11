@@ -305,7 +305,6 @@ div.anwansi_table > table {
     border-collapse:collapse;
     font-family:avenir, "helvetica neue", helvetica, arial, sans-serif;
     font-size:0px;
-    color:#333333;
 }
 
 div.anwansi_table > table th {
@@ -353,15 +352,13 @@ div.anwansi_table > table td.system.select > div.cell_content {
     padding:3px 3px;
 }
 
-div.anwansi_table.dark > table {
-    color:#E5E5E5;
-}
-
 div.anwansi_table.dark > table th {
     background-color:#333333;
-    border-bottom-color:#333333;
-    border-left-color:#000000;
-    border-right-color:#000000;
+    border-color:#666666;
+}
+
+div.anwansi_table.dark > table td {
+    border-color:#4C4C4C;
 }
 
 </style>

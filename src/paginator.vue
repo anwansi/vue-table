@@ -1,5 +1,5 @@
 <template>
-  <div class="paginator">
+  <div :class="['paginator', { dark }]">
     <div class="section sizes" v-if="showSizes">
       Show
       <div class="size" v-for="(item, i) in pageSizeMeta" :key="i">
@@ -33,6 +33,10 @@ export default {
         return {};
     },
     props : {
+        dark : {
+            type    : Boolean,
+            default : false
+        },
         showSizes : {
             type    : Boolean,
             default : true
@@ -251,7 +255,19 @@ export default {
 }
 
 .links .page:not(.clickable) {
-    color:#666666;
+    color:#333333;
+}
+
+.dark .links .page:not(.clickable) {
+    color:#CCCCCC;
+}
+
+.dark .links .previous {
+    border-right-color:#CCCCCC;
+}
+
+.dark .links .next {
+    border-left-color:#CCCCCC;
 }
 
 .sizes {

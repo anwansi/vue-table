@@ -11,6 +11,7 @@
                      :currentPage="currentPage"
                      :linkSpan="pageLinkSpan"
                      :allowAll="allowAllPages"
+                     :dark="dark"
                      @click-page="handleClickPaginatorPage"
                      @page-size="handlePaginatorPageSize"/>
         </div>
@@ -22,6 +23,7 @@
           <head-cell v-for="column in columnState"
                      :key="column.id"
                      :column="column"
+                     :dark="dark"
                      @click="handleClickColumn(column.id)"></head-cell>
         </tr>
       </thead>
@@ -46,6 +48,7 @@
                      :currentPage="currentPage"
                      :linkSpan="pageLinkSpan"
                      :allowAll="allowAllPages"
+                     :dark="dark"
                      @click-page="handleClickPaginatorPage"
                      @page-size="handlePaginatorPageSize"/>
         </div>
@@ -321,6 +324,11 @@ export default {
 
 div.anwansi_table {
     display:inline-block;
+    color:#000000;
+}
+
+div.anwansi_table.dark {
+    color:#FFFFFF;
 }
 
 .utils {

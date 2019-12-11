@@ -17,6 +17,10 @@ import validation from './validation';
 export default {
     name    : "HeadCell",
     props   : {
+        dark : {
+            type    : Boolean,
+            default : false
+        },
         column : {
             type    : Object,
             default : () => {},
@@ -65,6 +69,10 @@ export default {
                 classes.push('configured');
             }
 
+            if (this.dark) {
+                classes.push('dark');
+            }
+
             return classes;
         }
     },
@@ -104,6 +112,11 @@ th.sort_desc .post_content {
     border-color:#333333 transparent transparent transparent;
     transform-origin:50% 50%;
     transition:transform 500ms;
+}
+
+th.sort_asc.dark .post_content,
+th.sort_desc.dark .post_content {
+    border-top-color:#CCCCCC;
 }
 
 th.sort_desc .post_content {
