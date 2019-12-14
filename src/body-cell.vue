@@ -1,10 +1,10 @@
 <template>
   <td :class="cellClasses" :style="cellStyle">
     <div class="cell_content">
-      <input v-if="generateSelect"
-             ref="select"
-             type="checkbox"
-             @change="handleChangeCheckbox"/>
+      <checkbox v-if="generateSelect"
+                ref="checkBox"
+                :dark="dark"
+                @change="handleChangeCheckbox"/>
       <template v-else-if="booleanDisplay">
         <boolean-display :value="booleanDisplay.value" :text="booleanDisplay.text" />
       </template>
@@ -18,13 +18,18 @@
 <script>
 
 import BooleanDisplay from './boolean-display';
+import Checkbox from './checkbox';
 import formatter from './format';
 import validation from './validation';
 
 export default {
     name        : "BodyCell",
-    components  : { BooleanDisplay },
+    components  : { BooleanDisplay, Checkbox },
     props       : {
+        dark : {
+            type    : Boolean,
+            default : false
+        },
         column : {
             type    : Object,
             default : () => {},
@@ -36,6 +41,11 @@ export default {
             type    : Object,
             default : () => ({})
         }
+    },
+    data() {
+        return {
+            selected : false
+        };
     },
     computed : {
         generateSelect() {
@@ -167,11 +177,9 @@ export default {
         }
     },
     methods : {
-        isSelected() {
-            return this.$refs.select.checked;
-        },
-        handleChangeCheckbox(event, foo) {
-            this.$emit('select', this.isSelected());
+        handleChangeCheckbox(selected) {
+            this.selected = selected;
+            this.$emit('select', (this.selected = selected));
         }
     }
 };

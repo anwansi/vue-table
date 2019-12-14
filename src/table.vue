@@ -43,6 +43,7 @@
                      :key="colDef.id"
                      :column="colDef"
                      :cellData="rowData.data[colDef.id]"
+                     :dark="dark"
                      @select="handleCellSelect(colDef, rowData.id, $event)"></body-cell>
         </tr>
       </tbody>
