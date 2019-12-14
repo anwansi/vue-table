@@ -370,6 +370,7 @@ export default {
 div.anwansi_table {
     display:inline-block;
     color:#000000;
+    font-size:0px;
 }
 
 div.anwansi_table.dark {
@@ -405,6 +406,15 @@ div.anwansi_table.dark {
 
 .utils.upper_left, .utils.lower_left {
     justify-content:flex-start;
+}
+
+div.anwansi_table th,
+div.anwansi_table td {
+    font-size:14px;
+}
+
+div.anwansi_table td {
+    padding:2px 5px;
 }
 
 div.anwansi_table button {
