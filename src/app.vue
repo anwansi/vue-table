@@ -7,6 +7,13 @@
                @change="handleChangeDark" />
         Dark
       </label>
+      <label>
+        <input ref="selectInput"
+               type="checkbox"
+               checked
+               @change="handleChangeSelect" />
+        Enable Row Selection
+      </label>
     </div>
     <h1>Table Demo</h1>
     <vue-table :dark="dark"
@@ -15,6 +22,7 @@
                :defaultSort="defaultSort"
                :showRefresh="showRefresh"
                :showAdd="showAdd"
+               :enableSelect="enableSelect"
                :enableRefresh="enableRefresh"
                :enableAdd="enableAdd"
                :refreshing="tableRefreshing"
@@ -37,6 +45,7 @@ export default {
             tableRefreshing : false,
             showAdd         : true,
             showRefresh     : true,
+            enableSelect    : true,
             enableAdd       : true,
             enableRefresh   : true,
             columns         : [
@@ -288,6 +297,9 @@ export default {
         handleChangeDark(event) {
             this.dark = this.$refs.darkInput.checked;
         },
+        handleChangeSelect(event) {
+            this.enableSelect = this.$refs.selectInput.checked;
+        },
         handleTableAdd() {
             const auto = this.rows.find(item => (item.id === 'auto999'));
             if (auto) {
@@ -335,6 +347,10 @@ body.dark {
 }
 
 #options {
+}
+
+#options label {
+    margin-right:25px;
 }
 
 #app {
