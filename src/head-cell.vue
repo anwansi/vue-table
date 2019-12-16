@@ -4,7 +4,18 @@
       @click="handleClick">
     <div class="content">
       <div v-if="canSort" class="pre_content"></div>
-      <div class="cell_content">{{ column.name }}</div>
+      <div v-if="isSelectColumn" class="cell_content">
+        <div class="select all"
+             title="Select all rows"
+             @click="handleClickAll"></div>
+        <div class="select reverse"
+             title="Reverse selections"
+             @click="handleClickReverse"></div>
+        <div class="select none"
+             title="Unselect all rows"
+             @click="handleClickNone"></div>
+      </div>
+      <div v-else class="cell_content">{{ column.name }}</div>
       <div v-if="canSort" class="post_content"></div>
     </div>
   </th>
@@ -30,22 +41,25 @@ export default {
         }
     },
     computed : {
-        systemColumn() {
+        isSystemColumn() {
             return (this.column && this.column.system);
+        },
+        isSelectColumn() {
+            return (this.isSystemColumn && this.column.id === '_select');
         },
         cellStyle() {
             const result = {
                 display : this.column.hidden ? 'none' : ''
             };
 
-            if (! this.systemColumn) {
+            if (! this.isSystemColumn) {
                 result.cursor = 'pointer';
             }
 
             return result;
         },
         canSort() {
-            return ! this.systemColumn;
+            return ! this.isSystemColumn;
         },
         cellClasses() {
             const column  = this.column;
@@ -60,9 +74,9 @@ export default {
                     break;
             }
 
-            if (column.system) {
+            if (this.isSystemColumn) {
                 classes.push('system');
-                if (column.id === '_select') {
+                if (this.isSelectColumn) {
                     classes.push('select');
                 }
             } else {
@@ -80,6 +94,21 @@ export default {
         handleClick(event) {
             if (this.canSort) {
                 this.$emit('click');
+            }
+        },
+        handleClickAll(event) {
+            if (this.isSelectColumn) {
+                this.$emit('select-all');
+            }
+        },
+        handleClickNone(event) {
+            if (this.isSelectColumn) {
+                this.$emit('select-none');
+            }
+        },
+        handleClickReverse(event) {
+            if (this.isSelectColumn) {
+                this.$emit('select-reverse');
             }
         }
     }
@@ -126,5 +155,54 @@ th.sort_desc .post_content {
 .cell_content {
     margin:auto 3px;
 }
+
+th.select .cell_content {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:flex-start;
+}
+
+.cell_content > .select {
+    width:10px;
+    height:10px;
+    font-size:0px;
+    border:1px solid #333333;
+    margin:1px;
+    cursor:pointer;
+    position:relative;
+    top:0px;
+}
+
+.cell_content > .select:active {
+    top:1px;
+}
+
+.cell_content > .select.all {
+    background-color:#333333;
+}
+
+.cell_content > .select.none {
+}
+
+.cell_content > .select.reverse {
+    background-image:linear-gradient(to right, rgba(51, 51, 51, 0) 50%, rgba(51, 51, 51, 1) 50%);
+}
+
+th.dark .cell_content > .select {
+    border-color:#E6E6E6;
+}
+
+th.dark .cell_content > .select.all {
+    background-color:#E6E6E6;
+}
+
+th.dark .cell_content > .select.none {
+}
+
+th.dark .cell_content > .select.reverse {
+    background-image:linear-gradient(to right, rgba(230, 230, 230, 0) 50%, rgba(230, 230, 230, 1) 50%);
+}
+
 
 </style>
