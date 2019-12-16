@@ -6,6 +6,9 @@
                 :dark="dark"
                 :checked="selected"
                 @click="handleClickCheckbox"/>
+      <template v-else-if="generateMenu">
+        <local-menu v-if="hasMenu" :dark="dark" />
+      </template>
       <template v-else-if="booleanDisplay">
         <boolean-display :value="booleanDisplay.value" :text="booleanDisplay.text" />
       </template>
@@ -21,11 +24,12 @@
 import BooleanDisplay from './boolean-display';
 import Checkbox from './checkbox';
 import formatter from './format';
+import LocalMenu from './menu';
 import validation from './validation';
 
 export default {
     name        : "BodyCell",
-    components  : { BooleanDisplay, Checkbox },
+    components  : { BooleanDisplay, Checkbox, LocalMenu },
     props       : {
         dark : {
             type    : Boolean,
@@ -37,6 +41,10 @@ export default {
             validator(value) {
                 return validation.validateColumnDef(value);
             }
+        },
+        rowDataItem : {
+            type    : Object,
+            default : () => ({})
         },
         cellData : {
             type    : Object,
@@ -55,6 +63,19 @@ export default {
         generateSelect() {
             const column = this.column;
             return (column.system && column.id === '_select');
+        },
+        generateMenu() {
+            const column = this.column;
+            return (column.system && column.id === '_menu');
+        },
+        hasMenu() {
+            if (this.rowDataItem && 'enableRowMenu' in this.rowDataItem) {
+                if (! this.rowDataItem.enableRowMenu) {
+                    return false;
+                }
+            }
+
+            return true;
         },
         cellStyle() {
             const column = this.column;

@@ -46,6 +46,7 @@
           <body-cell v-for="colDef in columnState"
                      :key="colDef.id"
                      :column="colDef"
+                     :rowDataItem="dataItem"
                      :cellData="dataItem.data[colDef.id]"
                      :dark="dark"
                      :selected="dataItem.selected"
@@ -106,6 +107,10 @@ export default {
         enableSelect : {
             type    : Boolean,
             default : true
+        },
+        enableRowMenu : {
+            type    : Boolean,
+            default : false
         },
         pageSizes : {
             type    : Array,
@@ -197,6 +202,15 @@ export default {
                     sortDirection : sortDir
                 }, column);
             });
+
+            if (this.enableRowMenu) {
+                cols.unshift({
+                    id     : "_menu",
+                    name   : "",
+                    system : true,
+                    align  : 'center'
+                });
+            }
 
             if (this.enableSelect) {
                 cols.unshift({

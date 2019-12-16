@@ -14,6 +14,13 @@
                @change="handleChangeSelect" />
         Enable Row Selection
       </label>
+      <label>
+        <input ref="rowMenuInput"
+               type="checkbox"
+               checked
+               @change="handleChangeRowMenu" />
+        Enable Row Menu
+      </label>
     </div>
     <h1>Table Demo</h1>
     <vue-table :caption="caption"
@@ -24,6 +31,7 @@
                :showRefresh="showRefresh"
                :showAdd="showAdd"
                :enableSelect="enableSelect"
+               :enableRowMenu="enableRowMenu"
                :enableRefresh="enableRefresh"
                :enableAdd="enableAdd"
                :refreshing="tableRefreshing"
@@ -48,6 +56,7 @@ export default {
             showAdd         : true,
             showRefresh     : true,
             enableSelect    : true,
+            enableRowMenu   : true,
             enableAdd       : true,
             enableRefresh   : true,
             columns         : [
@@ -227,7 +236,8 @@ export default {
                         trim     : { value : 'signature series', displayValue : 'Signature Series' },
                         mileage  : { value : 60138 },
                         domestic : { value : true }
-                    }
+                    },
+                    enableRowMenu : false
                 },
                 {
                     id   : 'auto013',
@@ -301,6 +311,9 @@ export default {
         },
         handleChangeSelect(event) {
             this.enableSelect = this.$refs.selectInput.checked;
+        },
+        handleChangeRowMenu(event) {
+            this.enableRowMenu = this.$refs.rowMenuInput.checked;
         },
         handleTableAdd() {
             const auto = this.rows.find(item => (item.id === 'auto999'));
@@ -403,7 +416,8 @@ div.anwansi_table > table tr:hover td {
     background-color:rgba(51, 102, 255, 0.1);
 }
 
-div.anwansi_table > table th.system.select {
+div.anwansi_table > table th.system.select,
+div.anwansi_table > table th.system.menu {
     padding:5px;
 }
 

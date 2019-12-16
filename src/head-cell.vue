@@ -15,6 +15,7 @@
              title="Unselect all rows"
              @click="handleClickNone"></div>
       </div>
+      <div v-if="isMenuColumn" class="cell_content"></div>
       <div v-else class="cell_content">{{ column.name }}</div>
       <div v-if="canSort" class="post_content"></div>
     </div>
@@ -47,6 +48,9 @@ export default {
         isSelectColumn() {
             return (this.isSystemColumn && this.column.id === '_select');
         },
+        isMenuColumn() {
+            return (this.isSystemColumn && this.column.id === '_menu');
+        },
         cellStyle() {
             const result = {
                 display : this.column.hidden ? 'none' : ''
@@ -78,6 +82,9 @@ export default {
                 classes.push('system');
                 if (this.isSelectColumn) {
                     classes.push('select');
+                }
+                if (this.isMenuColumn) {
+                    classes.push('menu');
                 }
             } else {
                 classes.push('configured');
