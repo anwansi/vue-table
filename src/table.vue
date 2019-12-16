@@ -106,7 +106,7 @@ export default {
         },
         enableSelect : {
             type    : Boolean,
-            default : true
+            default : false
         },
         enableRowMenu : {
             type    : Boolean,
