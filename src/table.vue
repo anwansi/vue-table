@@ -38,13 +38,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(rowData, i) in pagedData" :key="i">
+        <tr v-for="(dataItem, i) in pagedRowData" :key="i">
           <body-cell v-for="colDef in columnState"
                      :key="colDef.id"
                      :column="colDef"
-                     :cellData="rowData.data[colDef.id]"
+                     :cellData="dataItem.data[colDef.id]"
                      :dark="dark"
-                     @select="handleCellSelect(colDef, rowData.id, $event)"></body-cell>
+                     @select="handleCellSelect(colDef, dataItem.id, $event)"></body-cell>
         </tr>
       </tbody>
     </table>
@@ -83,6 +83,7 @@ export default {
             hiddenColumns    : {},
             sortColumnId     : '',
             sortAscending    : true,
+            rowData          : [],
             currentPage      : 1,
             pageSize         : 10,
             pageLinkSpan     : 2
@@ -200,57 +201,46 @@ export default {
             return cols;
         },
         rowCount() {
-            return (this.rows || []).length;
+            return this.rowData.length;
         },
-        sortedRowData() {
-            const rowData = this.rows.slice();
-
-            if (this.sortColumnId) {
-                const column = this.columnById(this.sortColumnId);
-                if (column) {
-                    rowData.sort((a, b) => {
-                        const valueA = a.data[column.id].value;
-                        const valueB = b.data[column.id].value;
-
-                        switch (column.type) {
-                            case 'boolean':
-                                return this._compareBoolean(valueA, valueB);
-                                break;
-                            case 'number':
-                                return this._compareNumber(valueA, valueB);
-                                break;
-                            case 'string':
-                            default:
-                                return this._compareString(valueA, valueB);
-                                break;
-                        }
-                    });
-                    if (! this.sortAscending) {
-                        rowData.reverse();
-                    }
-                }
-            }
-
-            return rowData;
-        },
-        pagedData() {
-            const data = this.sortedRowData;
+        pagedRowData() {
             const size = this.pageSize;
 
             if (isNaN(parseInt(size))) {
-                return data;
+                return this.rowData;
             }
 
             const start = Math.max(this.currentPage - 1, 0) * size;
             const end   = start + size;
 
-            return data.slice(start, end);
+            return this.rowData.slice(start, end);
         },
         isRefreshDisabled() {
             return this.refreshing || ! this.enableRefresh;
         },
         isAddDisabled() {
             return this.refreshing || ! this.enableAdd;
+        }
+    },
+    watch : {
+        rows : {
+            immediate : true,
+            handler(newValue) {
+                this.rowData = (newValue || []).slice();
+                this.sortRowData();
+            }
+        },
+        sortColumnId : {
+            immediate : true,
+            handler(newValue) {
+                this.sortRowData();
+            }
+        },
+        sortAscending : {
+            immediate : true,
+            handler(newValue) {
+                this.sortRowData();
+            }
         }
     },
     methods : {
@@ -275,6 +265,33 @@ export default {
         },
         handlePaginatorPageSize(size) {
             this.pageSize = size;
+        },
+        sortRowData() {
+            if (this.sortColumnId) {
+                const column = this.columnById(this.sortColumnId);
+                if (column) {
+                    this.rowData.sort((a, b) => {
+                        const valueA = a.data[column.id].value;
+                        const valueB = b.data[column.id].value;
+
+                        switch (column.type) {
+                            case 'boolean':
+                                return this._compareBoolean(valueA, valueB);
+                                break;
+                            case 'number':
+                                return this._compareNumber(valueA, valueB);
+                                break;
+                            case 'string':
+                            default:
+                                return this._compareString(valueA, valueB);
+                                break;
+                        }
+                    });
+                    if (! this.sortAscending) {
+                        this.rowData.reverse();
+                    }
+                }
+            }
         },
         _compareBoolean(valueA, valueB) {
             const boolA = !! valueA;
