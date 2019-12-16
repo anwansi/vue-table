@@ -74,12 +74,16 @@ export default {
 
 .checkbox.checked .icon {
     position:absolute;
-    left:10%;
-    top:10%;
-    width:80%;
-    height:80%;
+    left:0%;
+    top:0%;
+    width:100%;
+    height:100%;
     background-image:url('./assets/checkmark.png');
     background-size:contain;
+    background-repeat:no-repeat;
+    background-position:center;
+    transform-origin:50% 50%;
+    transform:scaleX(0.8) scaleY(0.9);
 }
 
 </style>
