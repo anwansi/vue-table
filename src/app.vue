@@ -365,6 +365,7 @@ div.anwansi_table > table {
 
 div.anwansi_table > table th {
     font-size:14px;
+    line-height:14px;
     font-weight:normal;
     padding:5px 15px;
     background-color:#E5E5E5;
