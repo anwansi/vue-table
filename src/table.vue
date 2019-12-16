@@ -12,6 +12,7 @@
                 :title="addLabel"
                 :disabled="isAddDisabled"
                 @click="$emit('add')"></button>
+        <div v-if="caption" class="caption">{{ caption }}</div>
       </div>
       <div class="utils upper_right">
         <div class="pagination">
@@ -94,6 +95,10 @@ export default {
         };
     },
     props : {
+        caption : {
+            type    : String,
+            default : ''
+        },
         dark : {
             type    : Boolean,
             default : false
@@ -448,9 +453,11 @@ div.anwansi_table.dark {
 
 .utils.lower {
     align-items:flex-start;
+    padding-top:5px;
 }
 
 .utils.upper {
+    padding-bottom:5px;
     align-items:flex-end;
 }
 
@@ -472,6 +479,14 @@ div.anwansi_table.dark {
     justify-content:flex-start;
 }
 
+.utils.upper_right, .utils.upper_left {
+    align-items:flex-end;
+}
+
+.utils.lower_right, .utils.lower_left {
+    align-items:flex-start;
+}
+
 div.anwansi_table th,
 div.anwansi_table td {
     font-size:14px;
@@ -481,10 +496,17 @@ div.anwansi_table td {
     padding:2px 5px;
 }
 
+div.anwansi_table div.caption {
+    font-size:24px;
+    line-height:24px;
+    height:24px;
+    margin:0px 10px 0px 15px;
+}
+
 div.anwansi_table button {
     width:18px;
     height:18px;
-    margin:0px 0px 5px 10px;
+    margin:0px 0px 0px 10px;
     padding:0px;
     background-repeat:no-repeat;
     background-size:contain;
@@ -494,6 +516,7 @@ div.anwansi_table button {
     cursor:pointer;
     position:relative;
     top:0px;
+    top:-2px;
     transition:top 250ms, opacity 500ms;
 }
 
@@ -502,7 +525,7 @@ div.anwansi_table button:first-child {
 }
 
 div.anwansi_table button:active {
-    top:1px;
+    top:-1px;
 }
 
 div.anwansi_table button.add {

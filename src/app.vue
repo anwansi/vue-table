@@ -16,7 +16,8 @@
       </label>
     </div>
     <h1>Table Demo</h1>
-    <vue-table :dark="dark"
+    <vue-table :caption="caption"
+               :dark="dark"
                :columns="columns"
                :rows="rows"
                :defaultSort="defaultSort"
@@ -40,6 +41,7 @@ export default {
     components  : { VueTable },
     data() {
         return {
+            caption         : "Cars for Sale",
             dark            : false,
             defaultSort     : ['year', false],
             tableRefreshing : false,
