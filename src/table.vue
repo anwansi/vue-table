@@ -34,7 +34,10 @@
                      :key="column.id"
                      :column="column"
                      :dark="dark"
-                     @click="handleClickColumn(column.id)"></head-cell>
+                     @click="handleClickColumn(column.id)"
+                     @select-all="handleSelectAll"
+                     @select-none="handleSelectNone"
+                     @select-reverse="handleSelectReverse"></head-cell>
         </tr>
       </thead>
       <tbody>
@@ -44,7 +47,8 @@
                      :column="colDef"
                      :cellData="dataItem.data[colDef.id]"
                      :dark="dark"
-                     @select="handleCellSelect(colDef, dataItem.id, $event)"></body-cell>
+                     :selected="dataItem.selected"
+                     @select="handleCellSelect(colDef, dataItem, $event)"></body-cell>
         </tr>
       </tbody>
     </table>
@@ -215,6 +219,9 @@ export default {
 
             return this.rowData.slice(start, end);
         },
+        pagedRowIds() {
+            return this.pagedRowData.map(data => data.id);
+        },
         isRefreshDisabled() {
             return this.refreshing || ! this.enableRefresh;
         },
@@ -247,9 +254,11 @@ export default {
         columnById(id) {
             return this.columns.find(item => item.id === id);
         },
-        handleCellSelect(colDef, rowId, selected) {
+        handleCellSelect(colDef, rowDataItem, selected) {
+            this.$set(rowDataItem, "selected", ! rowDataItem.selected);
+
             if (colDef.system && colDef.id === '_select') {
-                this.$emit('select-row', colDef.id, rowId, selected);
+                this.$emit('select-row', rowDataItem.id, rowDataItem.selected);
             }
         },
         handleClickColumn(columnId) {
@@ -260,11 +269,49 @@ export default {
                 this.sortAscending = true;
             }
         },
+        handleSelectAll() {
+            this.selectAll();
+        },
+        handleSelectNone() {
+            this.selectNone();
+        },
+        handleSelectReverse() {
+            this.selectReverse();
+        },
         handleClickPaginatorPage(page) {
             this.currentPage = page;
+            this.selectNone();
         },
         handlePaginatorPageSize(size) {
             this.pageSize = size;
+            this.selectNone();
+        },
+        selectAll() {
+            this.selectEachRow((item, pagedIds) => {
+                if (item.id && pagedIds.includes(item.id)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        },
+        selectNone() {
+            this.selectEachRow((item, pagedIds) => false);
+        },
+        selectReverse() {
+            this.selectEachRow((item, pagedIds) => {
+                if (item.id && pagedIds.includes(item.id)) {
+                    return ! item.selected;
+                } else {
+                    return false;
+                }
+            });
+        },
+        selectEachRow(callback) {
+            const pagedIds = this.pagedRowIds;
+            this.rowData.forEach(item => {
+                this.$set(item, 'selected', callback(item, pagedIds));
+            });
         },
         sortRowData() {
             if (this.sortColumnId) {

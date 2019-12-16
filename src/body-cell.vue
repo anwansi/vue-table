@@ -4,7 +4,8 @@
       <checkbox v-if="generateSelect"
                 ref="checkBox"
                 :dark="dark"
-                @change="handleChangeCheckbox"/>
+                :checked="selected"
+                @click="handleClickCheckbox"/>
       <template v-else-if="booleanDisplay">
         <boolean-display :value="booleanDisplay.value" :text="booleanDisplay.text" />
       </template>
@@ -40,11 +41,14 @@ export default {
         cellData : {
             type    : Object,
             default : () => ({})
+        },
+        selected : {
+            type    : Boolean,
+            default : false
         }
     },
     data() {
         return {
-            selected : false
         };
     },
     computed : {
@@ -177,9 +181,8 @@ export default {
         }
     },
     methods : {
-        handleChangeCheckbox(selected) {
-            this.selected = selected;
-            this.$emit('select', (this.selected = selected));
+        handleClickCheckbox() {
+            this.$emit('select');
         }
     }
 };

@@ -16,11 +16,14 @@ export default {
         disabled : {
             type    : Boolean,
             default : false
+        },
+        checked : {
+            type    : Boolean,
+            default : false
         }
     },
     data() {
         return {
-            checked : false
         };
     },
     computed : {
@@ -33,9 +36,7 @@ export default {
             if (this.isDisabled) {
                 return;
             }
-            this.checked = ! this.checked;
             this.$emit('click', this.checked);
-            this.$emit('change', this.checked);
         }
     }
 };
