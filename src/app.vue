@@ -301,7 +301,7 @@ export default {
         dark : {
             immediate : true,
             handler(newValue) {
-                document.body.classList.toggle('dark', newValue);
+                document.documentElement.classList.toggle('dark', newValue);
             }
         }
     },
@@ -350,14 +350,26 @@ export default {
 
 <style>
 
-body {
+html {
     background-color:#FFFFFF;
-    color:#333333;
-    font-family:avenir, "helvetica neue", helvetica, arial, sans-serif;
+    height:100%;
+    padding:0px;
+    margin:0px;
 }
 
-body.dark {
+html.dark {
     background-color:#000000;
+}
+
+body {
+    color:#333333;
+    font-family:avenir, "helvetica neue", helvetica, arial, sans-serif;
+    height:100%;
+    padding:0px;
+    margin:0px;
+}
+
+html.dark body {
     color:#FFFFFF;
 }
 
