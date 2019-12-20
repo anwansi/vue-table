@@ -50,7 +50,8 @@
                      :cellData="dataItem.data[colDef.id]"
                      :dark="dark"
                      :selected="dataItem.selected"
-                     @select="handleCellSelect(colDef, dataItem, $event)"></body-cell>
+                     @select="handleCellSelect(colDef, dataItem, $event)"
+                     @menu-item="handleMenuItemClick(dataItem.id, $event)"></body-cell>
         </tr>
       </tbody>
     </table>
@@ -272,6 +273,9 @@ export default {
     methods : {
         columnById(id) {
             return this.columns.find(item => item.id === id);
+        },
+        handleMenuItemClick(rowId, eventCode) {
+            this.$emit('row-menu-item', { rowId, eventCode });
         },
         handleCellSelect(colDef, rowDataItem, selected) {
             this.$set(rowDataItem, "selected", ! rowDataItem.selected);

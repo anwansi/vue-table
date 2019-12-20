@@ -36,7 +36,8 @@
                :enableAdd="enableAdd"
                :refreshing="tableRefreshing"
                @add="handleTableAdd"
-               @refresh="handleTableRefresh" />
+               @refresh="handleTableRefresh"
+               @row-menu-item="handleRowMenuItem"/>
   </div>
 </template>
 
@@ -115,7 +116,9 @@ export default {
                         trim     : { value : '' },
                         mileage  : { value : 172191 },
                         domestic : { value : true }
-                    }
+                    },
+                    editMenuItem   : 'disabled',
+                    deleteMenuItem : 'enabled'
                 },
                 {
                     id   : 'auto002',
@@ -126,7 +129,9 @@ export default {
                         trim     : { value : 'gta' },
                         mileage  : { value : 119774 },
                         domestic : { value : true }
-                    }
+                    },
+                    editMenuItem   : 'disabled',
+                    deleteMenuItem : 'enabled'
                 },
                 {
                     id   : 'auto003',
@@ -137,7 +142,9 @@ export default {
                         trim     : { value : 'dx' },
                         mileage  : { value : 98394 },
                         domestic : { value : false }
-                    }
+                    },
+                    editMenuItem   : 'disabled',
+                    deleteMenuItem : 'disabled'
                 },
                 {
                     id   : 'auto004',
@@ -148,7 +155,9 @@ export default {
                         trim     : { value : 'xlt' },
                         mileage  : { value : 57510 },
                         domestic : { value : true }
-                    }
+                    },
+                    editMenuItem   : 'enabled',
+                    deleteMenuItem : 'enabled'
                 },
                 {
                     id   : 'auto005',
@@ -159,7 +168,9 @@ export default {
                         trim     : { value : '' },
                         mileage  : { value : 198987 },
                         domestic : { value : false }
-                    }
+                    },
+                    editMenuItem   : 'disabled',
+                    deleteMenuItem : 'disabled'
                 },
                 {
                     id   : 'auto006',
@@ -170,7 +181,9 @@ export default {
                         trim     : { value : 'ls' },
                         mileage  : { value : 70481 },
                         domestic : { value : true }
-                    }
+                    },
+                    editMenuItem   : 'enabled',
+                    deleteMenuItem : 'enabled'
                 },
                 {
                     id   : 'auto007',
@@ -181,7 +194,9 @@ export default {
                         trim     : { value : 'nx' },
                         mileage  : { value : 151312 },
                         domestic : { value : false }
-                    }
+                    },
+                    editMenuItem   : 'disabled',
+                    deleteMenuItem : 'disabled'
                 },
                 {
                     id   : 'auto008',
@@ -192,7 +207,9 @@ export default {
                         trim     : { value : 'royale', displayValue : 'Royale' },
                         mileage  : { value : 216673 },
                         domestic : { value : false }
-                    }
+                    },
+                    editMenuItem   : 'disabled',
+                    deleteMenuItem : 'enabled'
                 },
                 {
                     id   : 'auto009',
@@ -203,7 +220,9 @@ export default {
                         trim     : { value : 'xle' },
                         mileage  : { value : 83306 },
                         domestic : { value : false }
-                    }
+                    },
+                    editMenuItem   : 'enabled',
+                    deleteMenuItem : 'disabled'
                 },
                 {
                     id   : 'auto010',
@@ -214,7 +233,9 @@ export default {
                         trim     : { value : '' },
                         mileage  : { value : 124991 },
                         domestic : { value : true }
-                    }
+                    },
+                    editMenuItem   : 'disabled',
+                    deleteMenuItem : 'enabled'
                 },
                 {
                     id   : 'auto011',
@@ -225,7 +246,9 @@ export default {
                         trim     : { value : '' },
                         mileage  : { value : 97772 },
                         domestic : { value : true }
-                    }
+                    },
+                    editMenuItem   : 'disabled',
+                    deleteMenuItem : 'enabled'
                 },
                 {
                     id   : 'auto012',
@@ -237,7 +260,9 @@ export default {
                         mileage  : { value : 60138 },
                         domestic : { value : true }
                     },
-                    enableRowMenu : false
+                    editMenuItem   : 'enabled',
+                    deleteMenuItem : 'enabled',
+                    enableRowMenu  : false
                 },
                 {
                     id   : 'auto013',
@@ -248,7 +273,9 @@ export default {
                         trim     : { value : 'gt-x' },
                         mileage  : { value : 101188 },
                         domestic : { value : false }
-                    }
+                    },
+                    editMenuItem   : 'disabled',
+                    deleteMenuItem : 'disabled'
                 },
                 {
                     id   : 'auto014',
@@ -259,7 +286,9 @@ export default {
                         trim     : { value : 'slt' },
                         mileage  : { value : 235006 },
                         domestic : { value : true }
-                    }
+                    },
+                    editMenuItem   : 'disabled',
+                    deleteMenuItem : 'enabled'
                 },
                 {
                     id   : 'auto015',
@@ -270,7 +299,9 @@ export default {
                         trim     : { value : '' },
                         mileage  : { value : 16299 },
                         domestic : { value : false }
-                    }
+                    },
+                    editMenuItem   : 'disabled',
+                    deleteMenuItem : 'disabled'
                 },
                 {
                     id   : 'auto016',
@@ -281,7 +312,9 @@ export default {
                         trim     : { value : '' },
                         mileage  : { value : 89092 },
                         domestic : { value : false }
-                    }
+                    },
+                    editMenuItem   : 'enabled',
+                    deleteMenuItem : 'disabled'
                 },
                 {
                     id   : 'auto017',
@@ -292,7 +325,9 @@ export default {
                         trim     : { value : null },
                         mileage  : { value : null },
                         domestic : { value : null }
-                    }
+                    },
+                    editMenuItem   : 'disabled',
+                    deleteMenuItem : 'disabled'
                 }
             ]
         };
@@ -342,6 +377,27 @@ export default {
         handleTableRefresh() {
             this.tableRefreshing = true;
             setTimeout(() => { this.tableRefreshing = false; }, 2000);
+        },
+        handleRowMenuItem(args) {
+            let action = '';
+            if (args.eventCode === 'row-edit') {
+                action = "Edit";
+            } else if (args.eventCode === 'row-delete') {
+                action = "Delete";
+            }
+
+            if (action) {
+                const row = this.rows.find(item => item.id === args.rowId);
+
+                if (row) {
+                    const parts = [
+                        row.data.year.value, row.data.make.value,
+                        row.data.model.value
+                    ].filter(item => !! item);
+
+                    alert(`${action} ${parts.join(' ')}`);
+                }
+            }
         }
     }
 };

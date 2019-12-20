@@ -7,7 +7,10 @@
                 :checked="selected"
                 @click="handleClickCheckbox"/>
       <template v-else-if="generateMenu">
-        <local-menu v-if="hasMenu" :dark="dark" />
+        <local-menu v-if="hasMenu"
+                    :dark="dark"
+                    :items="menuItems"
+                    @click-item="handleMenuItemClick"/>
       </template>
       <template v-else-if="booleanDisplay">
         <boolean-display :value="booleanDisplay.value" :text="booleanDisplay.text" />
@@ -56,8 +59,7 @@ export default {
         }
     },
     data() {
-        return {
-        };
+        return {};
     },
     computed : {
         generateSelect() {
@@ -75,7 +77,39 @@ export default {
                 }
             }
 
+            if (! this.menuItems.length) {
+                return false;
+            }
+
             return true;
+        },
+        menuItems() {
+            const items = [];
+
+            if (this.rowDataItem) {
+                const delItem  = this.rowDataItem.deleteMenuItem || '';
+                const editItem = this.rowDataItem.editMenuItem   || '';
+
+                if (['disabled', 'enabled'].includes(editItem)) {
+                    items.push({
+                        iconClass : 'edit',
+                        label     : "Edit",
+                        eventCode : "row-edit",
+                        disabled  : (editItem === 'disabled')
+                    });
+                }
+
+                if (['disabled', 'enabled'].includes(delItem)) {
+                    items.push({
+                        iconClass : 'delete',
+                        label     : "Delete",
+                        eventCode : "row-delete",
+                        disabled  : (delItem === 'disabled')
+                    });
+                }
+            }
+
+            return items;
         },
         cellStyle() {
             const column = this.column;
@@ -204,6 +238,9 @@ export default {
     methods : {
         handleClickCheckbox() {
             this.$emit('select');
+        },
+        handleMenuItemClick(eventCode) {
+            this.$emit('menu-item', eventCode);
         }
     }
 };
