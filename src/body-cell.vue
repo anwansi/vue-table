@@ -227,6 +227,8 @@ export default {
                 classes.push('system');
                 if (column.id === '_select') {
                     classes.push('select');
+                } else if (column.id === '_menu') {
+                    classes.push('menu');
                 }
             } else {
                 classes.push('configured');
