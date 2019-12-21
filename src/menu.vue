@@ -52,13 +52,14 @@ export default {
     },
     methods : {
         menuItemClass(item) {
+            if (item.separator) {
+                return ['menu_item_separator'];
+            }
+
             const classes = ['menu_item'];
 
-            switch (item.iconClass) {
-                case 'edit':
-                case 'delete':
-                    classes.push(item.iconClass);
-                    break;
+            if (item.iconClass) {
+                classes.push(item.iconClass);
             }
 
             if (item.disabled) {
@@ -189,6 +190,12 @@ export default {
     background-color:#000000;
 }
 
+.menu .menu_item_separator {
+    background-color:#808080;
+    height:1px;
+    margin:5px 0px;
+}
+
 .menu .menu_item {
     display:flex;
     flex-direction:row;
@@ -213,18 +220,32 @@ export default {
 }
 
 .menu .menu_item .icon {
+    --mi-icon-size:18px;
     flex-grow:0;
     flex-shrink:0;
     width:18px;
     height:18px;
-    background-position:center;
-    background-size:cover;
+    background-position-x:0px;
+    background-position-y:0px;
+    background-size:auto calc(var(--mi-icon-size) * 2);
     background-repeat:no-repeat;
+    background-image:url('./assets/table-sprite.png');
     margin-right:10px;
+}
+
+.menu .menu_item .icon,
+.menu.dark .menu_item.enabled:hover .icon {
+    background-position-y:calc(var(--mi-icon-size) * 0);
+}
+
+.menu.dark .menu_item .icon,
+.menu .menu_item.enabled:hover .icon {
+    background-position-y:calc(var(--mi-icon-size) * -1);
 }
 
 .menu .menu_item .label {
     font-size:14px;
+    white-space:nowrap;
 }
 
 .menu .menu_item.enabled:hover {
@@ -235,26 +256,97 @@ export default {
     color:#FFFFFF;
 }
 
-.menu .menu_item.delete .icon,
-.menu.dark .menu_item.enabled.delete:hover .icon {
-    background-image:url('./assets/delete-black.png');
+.menu .menu_item.refresh .icon {
+    background-position-x:calc(var(--mi-icon-size) * 0);
 }
 
-.menu .menu_item.edit .icon,
-.menu.dark .menu_item.enabled.edit:hover .icon {
-    background-image:url('./assets/edit-black.png');
+.menu .menu_item.plus .icon {
+    background-position-x:calc(var(--mi-icon-size) * -1);
 }
 
-.menu.dark .menu_item.delete .icon,
-.menu .menu_item.enabled.delete:hover .icon {
-    background-image:url('./assets/delete-white.png');
+.menu .menu_item.delete .icon {
+    background-position-x:calc(var(--mi-icon-size) * -2);
 }
 
-.menu.dark .menu_item.edit .icon,
-.menu .menu_item.enabled.edit:hover .icon {
-    background-image:url('./assets/edit-white.png');
+.menu .menu_item.edit .icon {
+    background-position-x:calc(var(--mi-icon-size) * -3);
 }
 
+.menu .menu_item.camera .icon {
+    background-position-x:calc(var(--mi-icon-size) * -4);
+}
+
+.menu .menu_item.cart .icon {
+    background-position-x:calc(var(--mi-icon-size) * -5);
+}
+
+.menu .menu_item.clock .icon {
+    background-position-x:calc(var(--mi-icon-size) * -6);
+}
+
+.menu .menu_item.gear .icon {
+    background-position-x:calc(var(--mi-icon-size) * -7);
+}
+
+.menu .menu_item.power .icon {
+    background-position-x:calc(var(--mi-icon-size) * -8);
+}
+
+.menu .menu_item.play .icon {
+    background-position-x:calc(var(--mi-icon-size) * -9);
+}
+
+.menu .menu_item.pause .icon {
+    background-position-x:calc(var(--mi-icon-size) * -10);
+}
+
+.menu .menu_item.null .icon {
+    background-position-x:calc(var(--mi-icon-size) * -11);
+}
+
+.menu .menu_item.share .icon {
+    background-position-x:calc(var(--mi-icon-size) * -12);
+}
+
+.menu .menu_item.link .icon {
+    background-position-x:calc(var(--mi-icon-size) * -13);
+}
+
+.menu .menu_item.data .icon {
+    background-position-x:calc(var(--mi-icon-size) * -14);
+}
+
+.menu .menu_item.controls .icon {
+    background-position-x:calc(var(--mi-icon-size) * -15);
+}
+
+.menu .menu_item.lock .icon {
+    background-position-x:calc(var(--mi-icon-size) * -16);
+}
+
+.menu .menu_item.key .icon {
+    background-position-x:calc(var(--mi-icon-size) * -17);
+}
+
+.menu .menu_item.target .icon {
+    background-position-x:calc(var(--mi-icon-size) * -18);
+}
+
+.menu .menu_item.filter .icon {
+    background-position-x:calc(var(--mi-icon-size) * -19);
+}
+
+.menu .menu_item.chip .icon {
+    background-position-x:calc(var(--mi-icon-size) * -20);
+}
+
+.menu .menu_item.help .icon {
+    background-position-x:calc(var(--mi-icon-size) * -21);
+}
+
+.menu .menu_item.document .icon {
+    background-position-x:calc(var(--mi-icon-size) * -22);
+}
 
 .menu.dark:hover .dot {
     background-color:#FFFFFF;

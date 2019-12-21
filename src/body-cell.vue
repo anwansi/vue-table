@@ -84,7 +84,7 @@ export default {
             return true;
         },
         menuItems() {
-            const items = [];
+            let items = [];
 
             if (this.rowDataItem) {
                 const delItem  = this.rowDataItem.deleteMenuItem || '';
@@ -106,6 +106,14 @@ export default {
                         eventCode : "row-delete",
                         disabled  : (delItem === 'disabled')
                     });
+                }
+
+                const custom = this.rowDataItem.customMenuItems || [];
+                if (custom.length) {
+                    if (items.length) {
+                        items.push({ separator : true });
+                    }
+                    items = items.concat(custom);
                 }
             }
 

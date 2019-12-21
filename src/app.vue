@@ -326,8 +326,115 @@ export default {
                         mileage  : { value : null },
                         domestic : { value : null }
                     },
-                    editMenuItem   : 'disabled',
-                    deleteMenuItem : 'disabled'
+                    editMenuItem    : 'disabled',
+                    deleteMenuItem  : 'disabled',
+                    customMenuItems : [
+                        {
+                            iconClass : 'plus',
+                            label     : "Augment",
+                            eventCode : 'add'
+                        },
+                        {
+                            iconClass : 'refresh',
+                            label     : "Recycle",
+                            eventCode : 'recyle'
+                        },
+                        {
+                            iconClass : 'camera',
+                            label     : "Take Photo",
+                            eventCode : 'photo'
+                        },
+                        {
+                            iconClass : 'cart',
+                            label     : "Add to Cart",
+                            eventCode : 'cart'
+                        },
+                        {
+                            iconClass : 'clock',
+                            label     : "Reset Clock",
+                            eventCode : 'clock'
+                        },
+                        {
+                            iconClass : 'gear',
+                            label     : "Repair",
+                            eventCode : 'repair'
+                        },
+                        {
+                            iconClass : 'power',
+                            label     : "Power Up",
+                            eventCode : 'power'
+                        },
+                        {
+                            iconClass : 'play',
+                            label     : "Play",
+                            eventCode : 'play'
+                        },
+                        {
+                            iconClass : 'pause',
+                            label     : "Pause",
+                            eventCode : 'pause'
+                        },
+                        {
+                            iconClass : 'null',
+                            label     : "Null",
+                            eventCode : 'null'
+                        },
+                        {
+                            iconClass : 'share',
+                            label     : "Share",
+                            eventCode : 'share'
+                        },
+                        {
+                            iconClass : 'link',
+                            label     : "Link",
+                            eventCode : 'link'
+                        },
+                        {
+                            iconClass : 'data',
+                            label     : "Data",
+                            eventCode : 'data'
+                        },
+                        {
+                            iconClass : 'controls',
+                            label     : "Controls",
+                            eventCode : 'controls'
+                        },
+                        {
+                            iconClass : 'lock',
+                            label     : "Lock",
+                            eventCode : 'lock'
+                        },
+                        {
+                            iconClass : 'key',
+                            label     : "Key",
+                            eventCode : 'key'
+                        },
+                        {
+                            iconClass : 'target',
+                            label     : "Target",
+                            eventCode : 'target'
+                        },
+                        {
+                            iconClass : 'filter',
+                            label     : "Filter",
+                            eventCode : 'filter'
+                        },
+                        {
+                            iconClass : 'chip',
+                            label     : "Chip",
+                            eventCode : 'chip'
+                        },
+                        {
+                            iconClass : 'help',
+                            label     : "Help",
+                            eventCode : 'help'
+                        },
+                        {
+                            iconClass : 'document',
+                            label     : "Document",
+                            eventCode : 'document'
+                        }
+                    ]
                 }
             ]
         };
