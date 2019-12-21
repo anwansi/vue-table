@@ -1,11 +1,11 @@
 <template>
   <div :class="['menu', { dark, open }]">
-    <div class="icon" @click="handleClickIcon">
+    <div class="icon" @click="handleClickIcon" ref="iconNode">
       <div class="dot"></div>
       <div class="dot"></div>
       <div class="dot"></div>
     </div>
-    <div class="items" ref="itemsNode">
+    <div class="items" ref="itemsNode" :style="{ top : menuOffset }">
       <div :class="menuItemClass(item)"
            v-for="(item, i) in items"
            :key="i"
@@ -35,7 +35,8 @@ export default {
     },
     data() {
         return {
-            open : false
+            open       : false,
+            menuOffset : ''
         };
     },
     mounted() {
@@ -93,7 +94,20 @@ export default {
             this.open = false;
         },
         handleClickIcon(event) {
-            this.open = ! this.open;
+            let menuOffset  = '';
+
+            const iconDims = this.$refs.iconNode.getBoundingClientRect();
+            const menuDims = this.$refs.itemsNode.getBoundingClientRect();
+
+            const space = window.innerHeight - iconDims.y;
+            const ht    = menuDims.height + 20;
+
+            if (ht > space) {
+                menuOffset = `${- Math.ceil(ht - space)}px`;
+            }
+
+            this.menuOffset = menuOffset;
+            this.open       = ! this.open;
         }
     }
 };
@@ -138,11 +152,14 @@ export default {
     position:absolute;
     top:0px;
     left:0px;
+    max-height:300px;
+    overflow-y:auto;
     background-color:rgba(255, 255, 255, 0.5);
     backdrop-filter:blur(5px);
     box-shadow:1px 1px 2px 2px rgba(0, 0, 0, 0.2);
     opacity:0;
     z-index:-1;
+    transform:translateX(15px);
     transition:opacity 500ms, z-index 0ms 500ms;
 }
 
