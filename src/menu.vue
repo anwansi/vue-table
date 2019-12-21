@@ -131,8 +131,13 @@ export default {
     align-items:center;
     position:relative;
     top:0px;
-    transition:top 200ms;
+    transition:top 200ms, transform 500ms;
     cursor:pointer;
+    transform-origin:50% 50%;
+}
+
+.menu.open > .icon {
+    transform:rotate(90deg);
 }
 
 .menu .dot {

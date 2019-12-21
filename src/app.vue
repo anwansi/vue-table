@@ -493,6 +493,10 @@ div.anwansi_table > table td.system.select > div.cell_content {
     padding:3px 3px;
 }
 
+div.anwansi_table > table td.system.menu > div.cell_content {
+    padding:1px 3px;
+}
+
 div.anwansi_table.dark > table th {
     background-color:#333333;
     border-color:#666666;
