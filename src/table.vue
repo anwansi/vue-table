@@ -9,12 +9,12 @@
         </div>
         <button class="refresh"
                 v-if="refreshActionOn"
-                :title="refreshLabel"
+                :title="refreshActionLabel"
                 :disabled="isRefreshDisabled"
                 @click="$emit('refresh')"></button>
         <button class="add"
                 v-if="addActionOn"
-                :title="addLabel"
+                :title="addActionLabel"
                 :disabled="isAddDisabled"
                 @click="$emit('add')"></button>
         <div v-if="caption" class="caption">{{ caption }}</div>
@@ -156,9 +156,12 @@ export default {
             type    : Boolean,
             default : true
         },
-        addLabel : {
+        addActionLabel : {
             type    : String,
-            default : "Add"
+            default : "Add",
+            validator(value) {
+                return !! value;
+            }
         },
         refreshActionOn : {
             type    : Boolean,
@@ -168,9 +171,12 @@ export default {
             type    : Boolean,
             default : true
         },
-        refreshLabel : {
+        refreshActionLabel : {
             type    : String,
-            default : "Refresh"
+            default : "Refresh",
+            validator(value) {
+                return !! value;
+            }
         },
         refreshing : {
             type    : Boolean,
