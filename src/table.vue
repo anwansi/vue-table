@@ -313,7 +313,11 @@ export default {
             this.$emit('row-menu-item', { rowId, eventCode });
         },
         handleTableMenuItemClick(eventCode) {
-            this.$emit('table-menu-item', { eventCode });
+            if (eventCode === 'refresh') {
+                this.$emit('refresh');
+            } else {
+                this.$emit('table-menu-item', { eventCode });
+            }
         },
         handleCellSelect(colDef, rowDataItem, selected) {
             this.$set(rowDataItem, "selected", ! rowDataItem.selected);
