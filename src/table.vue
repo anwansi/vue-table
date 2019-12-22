@@ -253,7 +253,7 @@ export default {
 
             if (this.refreshActionOn) {
                 items.push({
-                    event     : 'refresh',
+                    eventCode : 'refresh',
                     label     : 'Refresh',
                     iconClass : 'refresh',
                     disabled  : ! this.refreshActionEnabled
@@ -262,7 +262,7 @@ export default {
 
             if (this.addActionOn) {
                 items.push({
-                    event     : 'add',
+                    eventCode : 'add',
                     label     : 'Add',
                     iconClass : 'plus',
                     disabled  : ! this.addActionEnabled
