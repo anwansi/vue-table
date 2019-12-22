@@ -67,7 +67,7 @@
                :dark="dark"
                :columns="columns"
                :rows="rows"
-               :defaultSort="defaultSort"
+               :sortColumnDefault="sortColumnDefault"
                :addActionOn="addActionOn"
                :addActionEnabled="addActionEnabled"
                :refreshActionOn="refreshActionOn"
@@ -93,7 +93,7 @@ export default {
         return {
             caption                 : "Cars for Sale",
             dark                    : false,
-            defaultSort             : ['year', false],
+            sortColumnDefault       : ['year', false],
             tableRefreshing         : false,
             addActionOn             : true,
             refreshActionOn         : true,

@@ -145,7 +145,7 @@ export default {
                 });
             }
         },
-        defaultSort : {
+        sortColumnDefault : {
             type : Array
         },
         addActionOn : {
@@ -178,7 +178,7 @@ export default {
         }
     },
     mounted() {
-        const defSort = this.defaultSort || [];
+        const defSort = this.sortColumnDefault || [];
 
         if (defSort && defSort.length) {
             const colId = defSort[0] || '';
