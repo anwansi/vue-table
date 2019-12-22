@@ -31,7 +31,7 @@
                :showRefresh="showRefresh"
                :showAdd="showAdd"
                :enableSelect="enableSelect"
-               :enableRowMenu="enableRowMenu"
+               :enableRowMenus="enableRowMenus"
                :enableRefresh="enableRefresh"
                :enableAdd="enableAdd"
                :refreshing="tableRefreshing"
@@ -57,7 +57,7 @@ export default {
             showAdd         : true,
             showRefresh     : true,
             enableSelect    : true,
-            enableRowMenu   : true,
+            enableRowMenus  : true,
             enableAdd       : true,
             enableRefresh   : true,
             columns         : [
@@ -262,7 +262,7 @@ export default {
                     },
                     editMenuItem   : 'enabled',
                     deleteMenuItem : 'enabled',
-                    enableRowMenu  : false
+                    enableRowMenus : false
                 },
                 {
                     id   : 'auto013',
@@ -455,7 +455,7 @@ export default {
             this.enableSelect = this.$refs.selectInput.checked;
         },
         handleChangeRowMenu(event) {
-            this.enableRowMenu = this.$refs.rowMenuInput.checked;
+            this.enableRowMenus = this.$refs.rowMenuInput.checked;
         },
         handleTableAdd() {
             const auto = this.rows.find(item => (item.id === 'auto999'));

@@ -109,7 +109,7 @@ export default {
             type    : Boolean,
             default : false
         },
-        enableRowMenu : {
+        enableRowMenus : {
             type    : Boolean,
             default : false
         },
@@ -204,7 +204,7 @@ export default {
                 }, column);
             });
 
-            if (this.enableRowMenu) {
+            if (this.enableRowMenus) {
                 cols.unshift({
                     id     : "_menu",
                     name   : "",
