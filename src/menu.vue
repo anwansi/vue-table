@@ -86,6 +86,7 @@ export default {
             }
 
             this.$emit('click-item', item.eventCode);
+            this.open = false;
         },
         handleClickDoc() {
             if (this.$el.contains(event.target)) {
