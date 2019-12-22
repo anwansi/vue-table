@@ -1,26 +1,64 @@
 <template>
   <div id="app" :class="{ dark }">
-    <div id="options">
-      <label>
-        <input ref="darkInput"
-               type="checkbox"
-               @change="handleChangeDark" />
-        Dark
-      </label>
-      <label>
-        <input ref="selectInput"
-               type="checkbox"
-               checked
-               @change="handleChangeSelect" />
-        Enable Row Selection
-      </label>
-      <label>
-        <input ref="rowMenuInput"
-               type="checkbox"
-               checked
-               @change="handleChangeRowMenu" />
-        Enable Row Menu
-      </label>
+    <div class="options">
+      <div class="option">
+        <label>
+          <input ref="darkInput"
+                 type="checkbox"
+                 @change="handleChangeDark" />
+          Dark
+        </label>
+      </div>
+      <div class="option">
+        <label>
+          <input ref="selectInput"
+                 type="checkbox"
+                 checked
+                 @change="handleChangeSelect" />
+          Enable Row Selection
+        </label>
+      </div>
+      <div class="option">
+        <label>
+          <input ref="rowMenuInput"
+                 type="checkbox"
+                 checked
+                 @change="handleChangeRowMenu" />
+          Enable Row Menu
+        </label>
+      </div>
+      <div class="option">
+        <label>
+          <input ref="showRefreshInput"
+                 type="checkbox"
+                 checked
+                 @change="handleChangeShowRefresh" />
+          Show Refresh
+        </label>
+        <label>
+          <input ref="enableRefreshInput"
+                 type="checkbox"
+                 checked
+                 @change="handleChangeEnableRefresh" />
+          Enable Refresh
+        </label>
+      </div>
+      <div class="option">
+        <label>
+          <input ref="showAddInput"
+                 type="checkbox"
+                 checked
+                 @change="handleChangeShowAdd" />
+          Show Add
+        </label>
+        <label>
+          <input ref="enableAddInput"
+                 type="checkbox"
+                 checked
+                 @change="handleChangeEnableAdd" />
+          Enable Add
+        </label>
+      </div>
     </div>
     <h1>Table Demo</h1>
     <vue-table :caption="caption"
@@ -459,6 +497,18 @@ export default {
         handleChangeRowMenu(event) {
             this.enableRowMenus = this.$refs.rowMenuInput.checked;
         },
+        handleChangeShowRefresh(event) {
+            this.showRefresh = this.$refs.showRefreshInput.checked;
+        },
+        handleChangeEnableRefresh(event) {
+            this.enableRefresh = this.$refs.enableRefreshInput.checked;
+        },
+        handleChangeShowAdd(event) {
+            this.showAdd = this.$refs.showAddInput.checked;
+        },
+        handleChangeEnableAdd(event) {
+            this.enableAdd = this.$refs.enableAddInput.checked;
+        },
         handleTableAdd() {
             const auto = this.rows.find(item => (item.id === 'auto999'));
             if (auto) {
@@ -541,11 +591,15 @@ html.dark body {
     color:#FFFFFF;
 }
 
-#options {
+.options {
 }
 
-#options label {
-    margin-right:25px;
+.options .option {
+    margin:0px 0px 12px;
+}
+
+.options .option label {
+    display:block;
 }
 
 #app {
