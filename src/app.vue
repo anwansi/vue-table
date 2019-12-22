@@ -73,7 +73,7 @@
                :refreshActionOn="refreshActionOn"
                :refreshActionEnabled="refreshActionEnabled"
                :rowSelectOn="rowSelectOn"
-               :enableRowMenus="enableRowMenus"
+               :rowMenusOn="rowMenusOn"
                :refreshing="tableRefreshing"
                @add="handleTableAdd"
                @refresh="handleTableRefresh"
@@ -98,7 +98,7 @@ export default {
             addActionOn             : true,
             refreshActionOn         : true,
             rowSelectOn             : true,
-            enableRowMenus          : true,
+            rowMenusOn              : true,
             addActionEnabled        : true,
             refreshActionEnabled    : true,
             columns                 : [
@@ -497,7 +497,7 @@ export default {
             this.rowSelectOn = this.$refs.selectInput.checked;
         },
         handleChangeRowMenu(event) {
-            this.enableRowMenus = this.$refs.rowMenuInput.checked;
+            this.rowMenusOn = this.$refs.rowMenuInput.checked;
         },
         handleChangeRefreshActionOn(event) {
             this.refreshActionOn = this.$refs.refreshActionOnInput.checked;
