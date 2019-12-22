@@ -37,7 +37,8 @@
                :refreshing="tableRefreshing"
                @add="handleTableAdd"
                @refresh="handleTableRefresh"
-               @row-menu-item="handleRowMenuItem"/>
+               @row-menu-item="handleRowMenuItem"
+               @table-menu-item="handleTableMenuItem"/>
   </div>
 </template>
 
@@ -506,6 +507,9 @@ export default {
                     alert(`${action} ${parts.join(' ')}`);
                 }
             }
+        },
+        handleTableMenuItem(args) {
+            // Do something here to respond to table menu items
         }
     }
 };

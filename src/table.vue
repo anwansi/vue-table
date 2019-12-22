@@ -2,6 +2,11 @@
   <div :class="['anwansi_table', { dark, refreshing }]">
     <div class="utils upper">
       <div class="utils upper_left">
+        <div class="table_menu">
+          <table-menu :dark="dark"
+                      :items="tableMenuItems"
+                      @click-item="handleTableMenuItemClick"/>
+        </div>
         <button class="refresh"
                 v-if="showRefresh"
                 :title="refreshLabel"
@@ -80,11 +85,12 @@
 import validation from './validation';
 import HeadCell from './head-cell';
 import BodyCell from './body-cell';
+import TableMenu from './menu';
 import Paginator from './paginator';
 
 export default {
     name       : 'Table',
-    components : { BodyCell, HeadCell, Paginator },
+    components : { BodyCell, HeadCell, TableMenu, Paginator },
     data() {
         return {
             hiddenColumns    : {},
@@ -242,6 +248,29 @@ export default {
         pagedRowIds() {
             return this.pagedRowData.map(data => data.id);
         },
+        tableMenuItems() {
+            const items = [];
+
+            if (this.showRefresh) {
+                items.push({
+                    event     : 'refresh',
+                    label     : 'Refresh',
+                    iconClass : 'refresh',
+                    disabled  : ! this.enableRefresh
+                });
+            }
+
+            if (this.showAdd) {
+                items.push({
+                    event     : 'add',
+                    label     : 'Add',
+                    iconClass : 'plus',
+                    disabled  : ! this.enableAdd
+                });
+            }
+
+            return items;
+        },
         isRefreshDisabled() {
             return this.refreshing || ! this.enableRefresh;
         },
@@ -276,6 +305,9 @@ export default {
         },
         handleMenuItemClick(rowId, eventCode) {
             this.$emit('row-menu-item', { rowId, eventCode });
+        },
+        handleTableMenuItemClick(eventCode) {
+            this.$emit('table-menu-item', { eventCode });
         },
         handleCellSelect(colDef, rowDataItem, selected) {
             this.$set(rowDataItem, "selected", ! rowDataItem.selected);
@@ -519,6 +551,11 @@ div.anwansi_table div.caption {
     line-height:24px;
     height:24px;
     margin:0px 10px 0px 15px;
+}
+
+div.anwansi_table .table_menu {
+    position:relative;
+    top:-2px;
 }
 
 div.anwansi_table button {
