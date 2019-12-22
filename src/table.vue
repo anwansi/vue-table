@@ -111,7 +111,7 @@ export default {
             type    : Boolean,
             default : false
         },
-        enableSelect : {
+        rowSelectOn : {
             type    : Boolean,
             default : false
         },
@@ -219,7 +219,7 @@ export default {
                 });
             }
 
-            if (this.enableSelect) {
+            if (this.rowSelectOn) {
                 cols.unshift({
                     id     : "_select",
                     name   : "",

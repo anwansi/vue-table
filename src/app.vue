@@ -15,7 +15,7 @@
                  type="checkbox"
                  checked
                  @change="handleChangeSelect" />
-          Enable Row Selection
+          Expose Row Selection
         </label>
       </div>
       <div class="option">
@@ -72,7 +72,7 @@
                :addActionEnabled="addActionEnabled"
                :refreshActionOn="refreshActionOn"
                :refreshActionEnabled="refreshActionEnabled"
-               :enableSelect="enableSelect"
+               :rowSelectOn="rowSelectOn"
                :enableRowMenus="enableRowMenus"
                :refreshing="tableRefreshing"
                @add="handleTableAdd"
@@ -97,7 +97,7 @@ export default {
             tableRefreshing         : false,
             addActionOn             : true,
             refreshActionOn         : true,
-            enableSelect            : true,
+            rowSelectOn             : true,
             enableRowMenus          : true,
             addActionEnabled        : true,
             refreshActionEnabled    : true,
@@ -494,7 +494,7 @@ export default {
             this.dark = this.$refs.darkInput.checked;
         },
         handleChangeSelect(event) {
-            this.enableSelect = this.$refs.selectInput.checked;
+            this.rowSelectOn = this.$refs.selectInput.checked;
         },
         handleChangeRowMenu(event) {
             this.enableRowMenus = this.$refs.rowMenuInput.checked;
