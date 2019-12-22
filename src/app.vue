@@ -223,7 +223,7 @@ export default {
                         mileage  : { value : 70481 },
                         domestic : { value : true }
                     },
-                    enableRowMenu  : true,
+                    rowMenuOn      : true,
                     editMenuItem   : 'enabled',
                     deleteMenuItem : 'enabled'
                 },
@@ -304,7 +304,7 @@ export default {
                     },
                     editMenuItem   : 'enabled',
                     deleteMenuItem : 'enabled',
-                    enableRowMenus : false
+                    rowMenuOn      : false
                 },
                 {
                     id   : 'auto013',

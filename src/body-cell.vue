@@ -71,8 +71,8 @@ export default {
             return (column.system && column.id === '_menu');
         },
         hasMenu() {
-            if (this.rowDataItem && 'enableRowMenu' in this.rowDataItem) {
-                if (! this.rowDataItem.enableRowMenu) {
+            if (this.rowDataItem && 'rowMenuOn' in this.rowDataItem) {
+                if (! this.rowDataItem.rowMenuOn) {
                     return false;
                 }
             }
