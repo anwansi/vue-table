@@ -28,35 +28,37 @@
         </label>
       </div>
       <div class="option">
+        <div class="header"><span class="bold">Refresh</span> Action</div>
         <label>
-          <input ref="showRefreshInput"
+          <input ref="refreshActionOnInput"
                  type="checkbox"
                  checked
-                 @change="handleChangeShowRefresh" />
-          Show Refresh
+                 @change="handleChangeRefreshActionOn" />
+          Expose
         </label>
         <label>
-          <input ref="enableRefreshInput"
+          <input ref="refreshActionEnabledInput"
                  type="checkbox"
                  checked
-                 @change="handleChangeEnableRefresh" />
-          Enable Refresh
+                 @change="handleChangeRefreshActionEnabled" />
+          Enable
         </label>
       </div>
       <div class="option">
+        <div class="header"><span class="bold">Add</span> Action</div>
         <label>
-          <input ref="showAddInput"
+          <input ref="addActionOnInput"
                  type="checkbox"
                  checked
-                 @change="handleChangeShowAdd" />
-          Show Add
+                 @change="handleChangeAddActionOn" />
+          Expose
         </label>
         <label>
-          <input ref="enableAddInput"
+          <input ref="addActionEnabledInput"
                  type="checkbox"
                  checked
-                 @change="handleChangeEnableAdd" />
-          Enable Add
+                 @change="handleChangeAddActionEnabled" />
+          Enable
         </label>
       </div>
     </div>
@@ -66,12 +68,12 @@
                :columns="columns"
                :rows="rows"
                :defaultSort="defaultSort"
-               :showRefresh="showRefresh"
-               :showAdd="showAdd"
+               :addActionOn="addActionOn"
+               :addActionEnabled="addActionEnabled"
+               :refreshActionOn="refreshActionOn"
+               :refreshActionEnabled="refreshActionEnabled"
                :enableSelect="enableSelect"
                :enableRowMenus="enableRowMenus"
-               :enableRefresh="enableRefresh"
-               :enableAdd="enableAdd"
                :refreshing="tableRefreshing"
                @add="handleTableAdd"
                @refresh="handleTableRefresh"
@@ -89,17 +91,17 @@ export default {
     components  : { VueTable },
     data() {
         return {
-            caption         : "Cars for Sale",
-            dark            : false,
-            defaultSort     : ['year', false],
-            tableRefreshing : false,
-            showAdd         : true,
-            showRefresh     : true,
-            enableSelect    : true,
-            enableRowMenus  : true,
-            enableAdd       : true,
-            enableRefresh   : true,
-            columns         : [
+            caption                 : "Cars for Sale",
+            dark                    : false,
+            defaultSort             : ['year', false],
+            tableRefreshing         : false,
+            addActionOn             : true,
+            refreshActionOn         : true,
+            enableSelect            : true,
+            enableRowMenus          : true,
+            addActionEnabled        : true,
+            refreshActionEnabled    : true,
+            columns                 : [
                 {
                     id      : 'year',
                     name    : 'Year',
@@ -497,17 +499,17 @@ export default {
         handleChangeRowMenu(event) {
             this.enableRowMenus = this.$refs.rowMenuInput.checked;
         },
-        handleChangeShowRefresh(event) {
-            this.showRefresh = this.$refs.showRefreshInput.checked;
+        handleChangeRefreshActionOn(event) {
+            this.refreshActionOn = this.$refs.refreshActionOnInput.checked;
         },
-        handleChangeEnableRefresh(event) {
-            this.enableRefresh = this.$refs.enableRefreshInput.checked;
+        handleChangeRefreshActionEnabled(event) {
+            this.refreshActionEnabled = this.$refs.refreshActionEnabledInput.checked;
         },
-        handleChangeShowAdd(event) {
-            this.showAdd = this.$refs.showAddInput.checked;
+        handleChangeAddActionOn(event) {
+            this.addActionOn = this.$refs.addActionOnInput.checked;
         },
-        handleChangeEnableAdd(event) {
-            this.enableAdd = this.$refs.enableAddInput.checked;
+        handleChangeAddActionEnabled(event) {
+            this.addActionEnabled = this.$refs.addActionEnabledInput.checked;
         },
         handleTableAdd() {
             const auto = this.rows.find(item => (item.id === 'auto999'));
@@ -529,8 +531,8 @@ export default {
                         domestic : { value : false }
                     }
                 });
-                this.enableAdd = false;
-                this.tableRefreshing = false;
+                this.addActionEnabled = false;
+                this.tableRefreshing  = false;
             }, 2000);
         },
         handleTableRefresh() {
@@ -591,15 +593,25 @@ html.dark body {
     color:#FFFFFF;
 }
 
+.bold {
+    font-weight:bold;
+}
+
 .options {
+    columns:3;
 }
 
 .options .option {
-    margin:0px 0px 12px;
+    padding:0px;
+}
+
+.options .option .header {
+    border-bottom:1px solid #CCCCCC;
 }
 
 .options .option label {
     display:block;
+    white-space:nowrap;
 }
 
 #app {

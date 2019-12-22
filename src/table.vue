@@ -8,12 +8,12 @@
                       @click-item="handleTableMenuItemClick"/>
         </div>
         <button class="refresh"
-                v-if="showRefresh"
+                v-if="refreshActionOn"
                 :title="refreshLabel"
                 :disabled="isRefreshDisabled"
                 @click="$emit('refresh')"></button>
         <button class="add"
-                v-if="showAdd"
+                v-if="addActionOn"
                 :title="addLabel"
                 :disabled="isAddDisabled"
                 @click="$emit('add')"></button>
@@ -148,25 +148,25 @@ export default {
         defaultSort : {
             type : Array
         },
-        showRefresh : {
+        addActionOn : {
             type    : Boolean,
             default : false
         },
-        showAdd : {
-            type    : Boolean,
-            default : false
-        },
-        enableRefresh : {
-            type    : Boolean,
-            default : true
-        },
-        enableAdd : {
+        addActionEnabled : {
             type    : Boolean,
             default : true
         },
         addLabel : {
             type    : String,
             default : "Add"
+        },
+        refreshActionOn : {
+            type    : Boolean,
+            default : false
+        },
+        refreshActionEnabled : {
+            type    : Boolean,
+            default : true
         },
         refreshLabel : {
             type    : String,
@@ -251,31 +251,31 @@ export default {
         tableMenuItems() {
             const items = [];
 
-            if (this.showRefresh) {
+            if (this.refreshActionOn) {
                 items.push({
                     event     : 'refresh',
                     label     : 'Refresh',
                     iconClass : 'refresh',
-                    disabled  : ! this.enableRefresh
+                    disabled  : ! this.refreshActionEnabled
                 });
             }
 
-            if (this.showAdd) {
+            if (this.addActionOn) {
                 items.push({
                     event     : 'add',
                     label     : 'Add',
                     iconClass : 'plus',
-                    disabled  : ! this.enableAdd
+                    disabled  : ! this.addActionEnabled
                 });
             }
 
             return items;
         },
         isRefreshDisabled() {
-            return this.refreshing || ! this.enableRefresh;
+            return this.refreshing || ! this.refreshActionEnabled;
         },
         isAddDisabled() {
-            return this.refreshing || ! this.enableAdd;
+            return this.refreshing || ! this.addActionEnabled;
         }
     },
     watch : {
