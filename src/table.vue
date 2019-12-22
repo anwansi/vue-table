@@ -522,20 +522,27 @@ div.anwansi_table div.caption {
 }
 
 div.anwansi_table button {
-    width:18px;
-    height:18px;
+    --btn-icon-size:18px;
+    width:var(--btn-icon-size);
+    height:var(--btn-icon-size);
     margin:0px 0px 0px 10px;
     padding:0px;
     background-repeat:no-repeat;
-    background-size:contain;
-    background-position:center;
+    background-size:auto calc(2 * var(--btn-icon-size));
+    background-position-x:100px;
+    background-position-y:0px;
     background-color:transparent;
+    background-image:url('./assets/table-sprite.png');
     border:0px;
     cursor:pointer;
     position:relative;
     top:0px;
     top:-2px;
     transition:top 250ms, opacity 500ms;
+}
+
+div.anwansi_table.dark button {
+    background-position-y:calc(-1 * var(--btn-icon-size));
 }
 
 div.anwansi_table button:first-child {
@@ -547,19 +554,11 @@ div.anwansi_table button:active {
 }
 
 div.anwansi_table button.add {
-    background-image:url('./assets/plus-black.png');
+    background-position-x:calc(-1 * var(--btn-icon-size));
 }
 
 div.anwansi_table button.refresh {
-    background-image:url('./assets/refresh-black.png');
-}
-
-div.anwansi_table.dark button.add {
-    background-image:url('./assets/plus-white.png');
-}
-
-div.anwansi_table.dark button.refresh {
-    background-image:url('./assets/refresh-white.png');
+    background-position-x:calc(0 * var(--btn-icon-size));
 }
 
 div.anwansi_table.refreshing button,
