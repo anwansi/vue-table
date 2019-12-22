@@ -7,7 +7,7 @@
                 :checked="selected"
                 @click="handleClickCheckbox"/>
       <template v-else-if="generateMenu">
-        <local-menu v-if="hasMenu"
+        <table-menu v-if="hasMenu"
                     :dark="dark"
                     :items="menuItems"
                     @click-item="handleMenuItemClick"/>
@@ -27,12 +27,12 @@
 import BooleanDisplay from './boolean-display';
 import Checkbox from './checkbox';
 import formatter from './format';
-import LocalMenu from './menu';
+import TableMenu from './menu';
 import validation from './validation';
 
 export default {
     name        : "BodyCell",
-    components  : { BooleanDisplay, Checkbox, LocalMenu },
+    components  : { BooleanDisplay, Checkbox, TableMenu },
     props       : {
         dark : {
             type    : Boolean,
