@@ -536,7 +536,6 @@ div.anwansi_table button {
     border:0px;
     cursor:pointer;
     position:relative;
-    top:0px;
     top:-2px;
     transition:top 250ms, opacity 500ms;
 }
