@@ -597,12 +597,8 @@ div.anwansi_table > table th.system.menu {
     padding:5px;
 }
 
-div.anwansi_table > table td.system.select > div.cell_content {
+div.anwansi_table > table td.system > div.cell_content {
     padding:3px 3px;
-}
-
-div.anwansi_table > table td.system.menu > div.cell_content {
-    padding:1px 3px;
 }
 
 div.anwansi_table.dark > table th {
