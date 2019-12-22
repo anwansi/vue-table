@@ -317,8 +317,8 @@ export default {
             this.$emit('row-menu-item', { rowId, eventCode });
         },
         handleTableMenuItemClick(eventCode) {
-            if (eventCode === 'refresh') {
-                this.$emit('refresh');
+            if (['refresh', 'add'].includes(eventCode)) {
+                this.$emit(eventCode);
             } else {
                 this.$emit('table-menu-item', { eventCode });
             }
