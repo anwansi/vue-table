@@ -26,7 +26,7 @@
                      :pageSize="pageSize"
                      :currentPage="currentPage"
                      :linkSpan="pageLinkSpan"
-                     :allowAll="allowAllPages"
+                     :allowAll="pageSizeAllowAll"
                      :dark="dark"
                      @click-page="handleClickPaginatorPage"
                      @page-size="handlePaginatorPageSize"/>
@@ -70,7 +70,7 @@
                      :pageSize="pageSize"
                      :currentPage="currentPage"
                      :linkSpan="pageLinkSpan"
-                     :allowAll="allowAllPages"
+                     :allowAll="pageSizeAllowAll"
                      :dark="dark"
                      @click-page="handleClickPaginatorPage"
                      @page-size="handlePaginatorPageSize"/>
@@ -123,7 +123,7 @@ export default {
             type    : Array,
             default : () => [10, 50, 200]
         },
-        allowAllPages : {
+        pageSizeAllowAll : {
             type    : Boolean,
             default : true
         },
