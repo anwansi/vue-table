@@ -374,6 +374,10 @@ export default {
     background-position-x:calc(var(--mi-icon-size) * -22);
 }
 
+.menu .menu_item.column .icon {
+    background-position-x:calc(var(--mi-icon-size) * -23);
+}
+
 .menu.dark:hover .dot {
     background-color:#FFFFFF;
 }

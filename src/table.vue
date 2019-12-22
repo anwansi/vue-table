@@ -78,6 +78,14 @@
         </div>
       </div>
     </div>
+    <div :class="['column_select', { open : selectingColumns }]">
+      <column-panel :columns="columnState"
+                    :dark="dark"
+                    @complete="handleColumnPanelComplete"
+                    @toggle-column="handleColumnPanelToggle"
+                    @show-column="handleColumnPanelShow"
+                    @hide-column="handleColumnPanelHide"/>
+    </div>
   </div>
 </template>
 
@@ -88,10 +96,11 @@ import HeadCell from './head-cell';
 import BodyCell from './body-cell';
 import TableMenu from './menu';
 import Paginator from './paginator';
+import ColumnPanel from './column-panel';
 
 export default {
     name       : 'Table',
-    components : { BodyCell, HeadCell, TableMenu, Paginator },
+    components : { BodyCell, ColumnPanel, HeadCell, TableMenu, Paginator },
     data() {
         return {
             hiddenColumns    : {},
@@ -100,7 +109,8 @@ export default {
             rowData          : [],
             currentPage      : 1,
             pageSize         : 10,
-            pageLinkSpan     : 2
+            pageLinkSpan     : 2,
+            selectingColumns : false
         };
     },
     props : {
@@ -122,6 +132,14 @@ export default {
         caption : {
             type    : String,
             default : ''
+        },
+        columnSelectorOn : {
+            type    : Boolean,
+            default : true
+        },
+        columnSelectorEnabled : {
+            type    : Boolean,
+            default : true
         },
         columns : {
             type    : Array,
@@ -276,6 +294,15 @@ export default {
                 });
             }
 
+            if (this.columnSelectorOn) {
+                items.push({
+                    eventCode : 'column-select',
+                    label     : "Manage Columns",
+                    iconClass : 'column',
+                    disabled  : ! this.columnSelectorEnabled
+                });
+            }
+
             return items;
         },
         isTableMenuDisabled() {
@@ -319,6 +346,8 @@ export default {
         handleTableMenuItemClick(eventCode) {
             if (['refresh', 'add'].includes(eventCode)) {
                 this.$emit(eventCode);
+            } else if (eventCode === 'column-select') {
+                this.selectingColumns = true;
             } else {
                 this.$emit('table-menu-item', { eventCode });
             }
@@ -354,6 +383,18 @@ export default {
         handlePaginatorPageSize(size) {
             this.pageSize = size;
             this.selectNone();
+        },
+        handleColumnPanelComplete() {
+            this.selectingColumns = false;
+        },
+        handleColumnPanelToggle(colId) {
+            this.$set(this.hiddenColumns, colId, ! this.hiddenColumns[colId]);
+        },
+        handleColumnPanelShow(colId) {
+            this.$set(this.hiddenColumns, colId, false);
+        },
+        handleColumnPanelHide(colId) {
+            this.$set(this.hiddenColumns, colId, true);
         },
         selectAll() {
             this.selectEachRow((item, pagedIds) => {
@@ -504,6 +545,7 @@ div.anwansi_table {
     display:inline-block;
     color:#000000;
     font-size:0px;
+    position:relative;
 }
 
 div.anwansi_table.dark {
@@ -632,6 +674,22 @@ div.anwansi_table.refreshing button.refresh {
     0% { transform:rotate(360deg) }
     50% { transform:rotate(180deg) }
     100% { transform:rotate(0deg) }
+}
+
+div.anwansi_table .column_select {
+    position:absolute;
+    top:0px;
+    left:1px;
+    opacity:0;
+    z-index:-1;
+    transition:opacity 1000ms, top 1000ms, z-index 0ms 1000ms;
+}
+
+div.anwansi_table .column_select.open {
+    opacity:1;
+    z-index:1;
+    top:32px;
+    transition:opacity 1000ms, top 1000ms, z-index 0ms 0ms;
 }
 
 </style>

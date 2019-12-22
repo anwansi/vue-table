@@ -137,10 +137,11 @@ export default {
                     emptyDash : true
                 },
                 {
-                    id     : 'domestic',
-                    name   : 'Domestic',
-                    type   : 'boolean',
-                    format : {
+                    id          : 'domestic',
+                    name        : 'Domestic',
+                    type        : 'boolean',
+                    description : "True for American makes only",
+                    format      : {
                         booleanIcon    : true,
                         booleanTextMap : { 'true' : 'Yes', 'false' : 'No' }
                     },
