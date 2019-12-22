@@ -182,6 +182,7 @@ export default {
                         mileage  : { value : 70481 },
                         domestic : { value : true }
                     },
+                    enableRowMenu  : true,
                     editMenuItem   : 'enabled',
                     deleteMenuItem : 'enabled'
                 },
