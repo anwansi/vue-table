@@ -1,5 +1,5 @@
 <template>
-  <div :class="['menu', { dark, open }]">
+  <div :class="['menu', { dark, open, disabled }]">
     <div class="icon" @click="handleClickIcon" ref="iconNode">
       <div class="dot"></div>
       <div class="dot"></div>
@@ -28,6 +28,10 @@ export default {
             type    : Boolean,
             default : false
         },
+        disabled : {
+            type    : Boolean,
+            default : false
+        },
         items : {
             type    : Array,
             default : () => []
@@ -38,6 +42,16 @@ export default {
             open       : false,
             menuOffset : ''
         };
+    },
+    watch : {
+        disabled : {
+            immediate : true,
+            handler(newValue) {
+                if (newValue) {
+                    this.open = false;
+                }
+            }
+        }
     },
     mounted() {
         this.docClick = listen.add(
@@ -96,6 +110,11 @@ export default {
             this.open = false;
         },
         handleClickIcon(event) {
+            if (this.disabled) {
+                this.open = false;
+                return;
+            }
+
             let menuOffset  = '';
 
             const iconDims = this.$refs.iconNode.getBoundingClientRect();
@@ -120,6 +139,8 @@ export default {
 
 .menu {
     position:relative;
+    opacity:1;
+    transition:opacity 1000ms;
 }
 
 .menu > .icon {
@@ -183,12 +204,16 @@ export default {
     transition:opacity 500ms, z-index 0ms 0ms;
 }
 
-.menu:active > .icon {
+.menu:not(.disabled):active > .icon {
     top:1px;
 }
 
-.menu:hover .dot {
+.menu:not(.disabled):hover .dot {
     background-color:#000000;
+}
+
+.menu.disabled {
+    opacity:0.5;
 }
 
 .menu .menu_item_separator {

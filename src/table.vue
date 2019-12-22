@@ -5,12 +5,13 @@
         <div class="table_menu">
           <table-menu :dark="dark"
                       :items="tableMenuItems"
+                      :disabled="isTableMenuDisabled"
                       @click-item="handleTableMenuItemClick"/>
         </div>
         <button class="refresh"
                 v-if="refreshActionOn"
                 :title="refreshActionLabel"
-                :disabled="isRefreshDisabled"
+                :disabled="isTableMenuDisabled"
                 @click="$emit('refresh')"></button>
         <button class="add"
                 v-if="addActionOn"
@@ -276,6 +277,9 @@ export default {
             }
 
             return items;
+        },
+        isTableMenuDisabled() {
+            return this.refreshing;
         },
         isRefreshDisabled() {
             return this.refreshing || ! this.refreshActionEnabled;
