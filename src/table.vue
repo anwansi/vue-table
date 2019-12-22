@@ -104,51 +104,6 @@ export default {
         };
     },
     props : {
-        caption : {
-            type    : String,
-            default : ''
-        },
-        dark : {
-            type    : Boolean,
-            default : false
-        },
-        rowSelectOn : {
-            type    : Boolean,
-            default : false
-        },
-        rowMenusOn : {
-            type    : Boolean,
-            default : false
-        },
-        pageSizes : {
-            type    : Array,
-            default : () => [10, 50, 200]
-        },
-        pageSizeAllowAll : {
-            type    : Boolean,
-            default : true
-        },
-        columns : {
-            type    : Array,
-            default : () => [],
-            validator(value) {
-                return value.every(item => {
-                    return validation.validateColumnDef(item);
-                });
-            }
-        },
-        rows : {
-            type    : Array,
-            default : () => [],
-            validator(value) {
-                return value.every(item => {
-                    return (typeof item === 'object');
-                });
-            }
-        },
-        sortColumnDefault : {
-            type : Array
-        },
         addActionOn : {
             type    : Boolean,
             default : false
@@ -163,6 +118,31 @@ export default {
             validator(value) {
                 return !! value;
             }
+        },
+        caption : {
+            type    : String,
+            default : ''
+        },
+        columns : {
+            type    : Array,
+            default : () => [],
+            validator(value) {
+                return value.every(item => {
+                    return validation.validateColumnDef(item);
+                });
+            }
+        },
+        dark : {
+            type    : Boolean,
+            default : false
+        },
+        pageSizeAllowAll : {
+            type    : Boolean,
+            default : true
+        },
+        pageSizes : {
+            type    : Array,
+            default : () => [10, 50, 200]
         },
         refreshActionOn : {
             type    : Boolean,
@@ -182,6 +162,26 @@ export default {
         refreshing : {
             type    : Boolean,
             default : false
+        },
+        rowMenusOn : {
+            type    : Boolean,
+            default : false
+        },
+        rowSelectOn : {
+            type    : Boolean,
+            default : false
+        },
+        rows : {
+            type    : Array,
+            default : () => [],
+            validator(value) {
+                return value.every(item => {
+                    return (typeof item === 'object');
+                });
+            }
+        },
+        sortColumnDefault : {
+            type : Array
         }
     },
     mounted() {
